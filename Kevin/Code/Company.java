@@ -1,6 +1,7 @@
 package Kevin.Code;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import Kevin.Code.Employer;
@@ -11,14 +12,14 @@ public class Company implements Serializable {
 
     }
 
-    private static LinkedList<Employer> workers = new LinkedList<Employer>();
+    private static HashMap< String , Employer> workers = new HashMap<String, Employer>();
     private static Employer manager = new Employer();
     private static final String companyName = "KevCorp";
 
     /**
      * @param workers the workers to set
      */
-    public static void setWorkers(LinkedList<Employer> workers) {
+    public static void setWorkers( HashMap< String , Employer> workers) {
         Company.workers = workers;
     }
 
@@ -30,25 +31,16 @@ public class Company implements Serializable {
     }
 
     public static void addWorker(Employer worker){
-        workers.add(worker);
+        workers.put(worker.getId(), worker);
     }
 
-    public static boolean removeWorker(Employer woker){
-        if(workers.isEmpty() || woker == null)
+    public static boolean removeWorker(String Id){
+        if(workers.isEmpty())
             return false;
         else{
-            Iterator<Employer>it = workers.iterator();
-            int index = 0;
-            while(it.hasNext()){
-                Employer emp = it.next();
-                if(emp.equals(woker)){
-                    workers.remove(index);
-                    return true;
-                }
-                index ++;
-            }
+            workers.remove(Id);
+            return true;
         }
-        return false;
     }
 
     /**
@@ -68,7 +60,7 @@ public class Company implements Serializable {
     /**
      * @return the workers
      */
-    public  LinkedList<Employer> getWorkers() {
+    public  HashMap<String, Employer> getWorkers() {
         return workers;
     }
 }

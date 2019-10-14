@@ -1,7 +1,7 @@
 package Kevin.Code;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class Day {
 
@@ -9,38 +9,30 @@ public class Day {
     
     }
 
-    private LinkedList<Employer> workerList = new LinkedList<Employer>();
+    private HashMap<String, Employer> workerList = new HashMap<String, Employer>();
 
     public void addWorker(Employer woker) {
-       workerList.add(woker);
+       workerList.putIfAbsent(woker.getId(), woker);
     }
 
-    public boolean removeWorker(Employer woker){
-        if(workerList.isEmpty() || woker == null)
+    public boolean removeWorker(String Id){
+        if(workerList.isEmpty())
             return false;
         else{
-            Iterator<Employer>it = workerList.iterator();
-            int index = 0;
-            while(it.hasNext()){
-                Employer emp = it.next();
-                if(emp.equals(woker)){
-                    workerList.remove(index);
-                    return true;
-                }
-                index ++;
-            }
+            workerList.remove(Id);
+            return true;
         }
-        return false;
     }
 
-    public LinkedList<Employer> getList(){
-        return this.workerList;
+    public Collection<Employer> getList(){
+        System.out.println(workerList.size());
+        return workerList.values();
     }
 
     public void clearDay(){
-        for(int i = 0; i < workerList.size(); i++){
-            workerList.remove(i);
-        }
+
+        workerList.clear();
+
     }
 
 }

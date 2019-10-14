@@ -2,13 +2,16 @@ package Kevin.Code;
 
 public class Employer {
     private String nom;
+    private String Id;
 
     public Employer(){
         this.nom = "Kevin";
+        this.Id = this.nom;
     }
 
-    public Employer(String nom){
+    public Employer(String nom, String Id){
         this.nom = nom;
+        this.Id = Id;
     }
 
     /**
@@ -23,6 +26,13 @@ public class Employer {
      */
     public String getNom() {
         return nom;
+    }
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return Id;
     }
 
     @Override
