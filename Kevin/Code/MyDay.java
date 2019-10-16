@@ -1,45 +1,58 @@
 package Kevin.Code;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class MyDay{
 
     public MyDay(){
-        this.start = 0;
-        this.end = 0;
         this.day  = null;
     }
 
     public double calculerHoraire(){
-        return this.end - this.start;
+        return (double)Duration.between(start, end).toMinutes()/60;
     }
 
     public void clearDay(){
-        this.start = 0;
-        this.end = 0;
+        this.start = null;
+        this.end = null;
         this.day  = null;
     }
-
-    public void setDay(){
-        this.day = new Date();
-    }
-
     public void start(){
-        this.start = Calendar.getInstance().get(Calendar.HOUR)+ (double)Calendar.getInstance().get(Calendar.MINUTE)/60;
+        this.start = LocalDateTime.now();
     }
 
     public void end(){
-        this.end = Calendar.getInstance().get(Calendar.HOUR) + (double)Calendar.getInstance().get(Calendar.MINUTE)/60;
+        this.end = LocalDateTime.now();
     }
 
-    public double getEnd(){ return this.end;}
-    public double getStart(){ return this.start;}
-    public Date getDay(){return this.day;}
+    public LocalDateTime getEnd(){ return this.end;}
+    public LocalDateTime getStart(){ return this.start;}
+    public LocalDate getDay(){return this.day;}
+    /**
+     * @param end the end to set
+     */
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
+    }
 
-    private double start;
-    private double end;
-    private Date day;
+    /**
+     * @param start the start to set
+     */
+    public void setStart(LocalDateTime start) {
+        this.start = start;
+    }
 
-
+    /**
+     * @param day the day to set
+     */
+    public void setDay(LocalDate day) {
+        this.day = day;
+    }
+    
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private LocalDate day;
+   
 }
