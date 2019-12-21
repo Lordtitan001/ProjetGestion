@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Button",
+            "request": "launch",
+            "mainClass": "Interface.Button",
+            "projectName": "ProjetGestion_c01a979"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - TestCompany",
             "request": "launch",
             "mainClass": "Michel.TestCompany",

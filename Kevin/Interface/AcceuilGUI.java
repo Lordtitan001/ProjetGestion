@@ -7,11 +7,14 @@ import Interface.AbsInterfaceContainer;
 public class AcceuilGUI extends AbsInterfaceContainer {
 
   private static final long serialVersionUID = 1L;
-  
+
   JTextField searchBarField = new JTextField("Nothing here for now");
+  
     public void fenetre(){
         
     }
+
+
     public static void main(String[] args){
 
         JFrame fenetre = new JFrame();
