@@ -2,31 +2,22 @@ package Kevin.Code;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import Kevin.Code.Employer;
+import Michel.Employer;
+import Michel.Superviseur;;
 
 public class Company implements Serializable {
 
-    public Company() {
+    public Company() {}
 
-    }
-
-    private static HashMap< String , Employer> workers = new HashMap<String, Employer>();
-    private static Employer manager = new Employer();
+    private static HashMap<String , Employer> workers = new HashMap<String, Employer>();
+    private static Superviseur manager = new Superviseur("Manager");
     private static final String companyName = "KevCorp";
 
-    /**
-     * @param workers the workers to set
-     */
     public static void setWorkers( HashMap< String , Employer> workers) {
         Company.workers = workers;
     }
 
-    /**
-     * @param manager the manager to set
-     */
-    public void setManager(Employer man) {
+    public void setManager(Superviseur man) {
         manager = man;
     }
 
@@ -43,23 +34,14 @@ public class Company implements Serializable {
         }
     }
 
-    /**
-     * @return the manager
-     */
-    public  Employer getManager() {
+     public  Employer getManager() {
         return manager;
     }
 
-    /**
-     * @return the companyname
-     */
     public  String getCompanyname() {
         return companyName;
     }
 
-    /**
-     * @return the workers
-     */
     public  HashMap<String, Employer> getWorkers() {
         return workers;
     }

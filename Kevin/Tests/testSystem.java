@@ -1,8 +1,10 @@
 package Kevin.Tests;
 
 import Kevin.Code.Company;
-import Kevin.Code.Employer;
-import Kevin.Code.Systeme;;;
+import Michel.Employer;
+import Michel.Infirmier;
+import Michel.Superviseur;
+import Kevin.Code.Systeme;
 
 public class testSystem {
 
@@ -10,15 +12,14 @@ public class testSystem {
 
         Company comp = new Company();
 
-        comp.getWorkers().put("1", new Employer("kev lems", "1"));
-        comp.getWorkers().put("2", new Employer("kev lems", "2"));
-        comp.getWorkers().put("3", new Employer("kev lems", "3"));
+        comp.getWorkers().put("1", new Infirmier("kev lems"));
+        comp.getWorkers().put("2", new Infirmier("kev lems"));
+        comp.getWorkers().put("3", new Infirmier("kev lems"));
+        comp.getWorkers().put("4", new Infirmier("kev lems"));
+        comp.getWorkers().put("5", new Infirmier("kev lems"));
 
-        comp.getWorkers().put("3" , new Employer("kev lems", "4"));
-        comp.getWorkers().put("4", new Employer("kev lems", "5"));
-        
-
-        comp.setManager(new Employer("lems", "6"));
+        comp.setManager(new Superviseur("lems"));
+        Company.removeWorker("3");
 
         Systeme sys = new Systeme();
         sys.saveCompany();
@@ -26,11 +27,11 @@ public class testSystem {
         Company com = sys.restaureCompany();
 
         System.out.println("la compagnie restaure : " + com.getCompanyname());
-        System.out.println("Manager : " + com.getManager().getNom());
+        System.out.println("Manager : " + com.getManager().getName());
         System.out.println("La liste des employers : ");
 
         for(Employer em : com.getWorkers().values()){
-            System.out.println("Nom : " + em.getNom() + " Id : " + em.getId()); 
+            System.out.println("Nom : " + em.getName() + " Id : " + em.getId()); 
         }
     }
 

@@ -1,8 +1,9 @@
 package Kevin.Tests;
 import Kevin.Code.Company;
 import Kevin.Code.Day;
-import Kevin.Code.Employer;
+import Michel.Employer;
 import Kevin.Code.MyDay;
+import Michel.Infirmier;;
 
 public class testDay {
 
@@ -10,10 +11,10 @@ public class testDay {
     
         System.out.println("************Test de la classe Day****************");
         Day jour = new Day();
-        Employer emp1 = new Employer();
-        Employer emp2 = new Employer("michel", "1");
-        Employer emp3 = new Employer("lems", "3");
-        Employer emp4 = new Employer("Black", "2");
+        Employer emp1 = new Infirmier("em");
+        Employer emp2 = new Infirmier("michel");
+        Employer emp3 = new Infirmier("lems");
+        Employer emp4 = new Infirmier("Black");
 
         Company com = new Company();
 
@@ -30,7 +31,7 @@ public class testDay {
         
 
         for(Employer emp : jour.getList()){
-            System.out.println(emp.getNom());
+            System.out.println(emp.getName());
         }
         System.out.println("");
 
@@ -38,7 +39,7 @@ public class testDay {
 
         System.out.println("workers List: ");
         for(Employer emp : jour.getList()){
-            System.out.print( emp.getNom() + " ");
+            System.out.print( emp.getName() + " ");
         }
 
         System.out.println("");
@@ -81,7 +82,7 @@ public class testDay {
 
 
         for(Employer emp : jour.getList()){
-            System.out.println( emp.getNom() + " Liste des shifts : ");
+            System.out.println( emp.getName() + " Liste des shifts : ");
             System.out.println("");
             for(int i = 1; i <= emp.getAdditionalShift(); i++){
                 MyDay day = jour.getShift(emp.getId(), i);
@@ -103,7 +104,7 @@ public class testDay {
         System.out.println("***************************************************************************************************");
 
         for(Employer emp : jour.getList()){
-            System.out.println( emp.getNom() + " Liste des shifts : ");
+            System.out.println( emp.getName() + " Liste des shifts : ");
             System.out.println("");
             for(int i = 1; i <= emp.getAdditionalShift(); i++){
                 MyDay day = jour.getShift(emp.getId(), i);
