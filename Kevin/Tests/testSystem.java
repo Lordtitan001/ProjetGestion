@@ -9,7 +9,6 @@ import Kevin.Code.Systeme;
 public class testSystem {
 
     public static void main(String args[]){
-
         Company comp = new Company();
 
         comp.getWorkers().put("1", new Infirmier("kev lems"));

@@ -1,12 +1,14 @@
 package Kevin.Interface;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import Interface.AbsInterfaceContainer;
 
-public class AcceuilGUI {
+public class AcceuilGUI extends AbsInterfaceContainer {
 
-    JTextField searchBarField = new JTextField("Nothing here for now");
+  private static final long serialVersionUID = 1L;
+  
+  JTextField searchBarField = new JTextField("Nothing here for now");
     public void fenetre(){
         
     }
