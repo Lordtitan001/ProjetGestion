@@ -11,10 +11,10 @@ import javax.swing.JFrame;
 public class Button extends JButton {
 
     String name = "";
-    Button(String name){
+    public Button(String name){
         super(name);
         this.name = name;
-        this.setSize(100, 200);
+        this.setSize(50, 300);
     }
     public void paintComponent(Graphics g){
          Graphics2D g2 = (Graphics2D)g;
