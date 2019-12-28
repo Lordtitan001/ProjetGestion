@@ -7,7 +7,10 @@ import Michel.Superviseur;;
 
 public class Company implements Serializable {
 
-    public Company() {}
+    private static final long serialVersionUID = 1L;
+
+    public Company() {
+    }
 
     private static HashMap<String , Employer> workers = new HashMap<String, Employer>();
     private static Superviseur manager = new Superviseur("Manager");
@@ -42,7 +45,7 @@ public class Company implements Serializable {
         return companyName;
     }
 
-    public  HashMap<String, Employer> getWorkers() {
+    public static HashMap<String, Employer> getWorkers() {
         return workers;
     }
 }

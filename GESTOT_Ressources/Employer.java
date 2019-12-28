@@ -11,8 +11,8 @@ public abstract class Employer implements Serializable{
 	protected String Id;
 	protected String name;
 	protected String passWord="Employer000";
-	protected HashMap<LocalDate,LinkedList<MyDay>> dayList=new HashMap<LocalDate,LinkedList<MyDay>>(); // represente la liste de toutes les periodes de travail de l'employé
-	protected static Day dayWorkersList=new Day(); // represente la liste <employe-listePeriodes> pour tous les employé ayant travaillé  ce jours
+	protected HashMap<LocalDate,LinkedList<MyDay>> dayList=new HashMap<LocalDate,LinkedList<MyDay>>(); // represente la liste de toutes les periodes de travail de l'employï¿½
+	protected static Day dayWorkersList=new Day(); // represente la liste <employe-listePeriodes> pour tous les employï¿½ ayant travaillï¿½  ce jours
 	protected static int nbWorkers=0;
 	private int additionalShift = 0;
 
@@ -48,7 +48,7 @@ public abstract class Employer implements Serializable{
     		  ((Employer)obj).getId().equals(Id);
     }
 	
-	public boolean addDayInList() { // permet d'ajouter la PERIODE EN COURS parmis la liste des periodes de l'employé
+	public boolean addDayInList() { // permet d'ajouter la PERIODE EN COURS parmis la liste des periodes de l'employï¿½
 		LinkedList<MyDay> listPeriod = null;
     	if(!dayList.containsKey(myDay.getDay())) {
     		listPeriod =  new LinkedList<MyDay>();
@@ -64,7 +64,7 @@ public abstract class Employer implements Serializable{
     	return (listPeriod == null);
 	}
 	
-	/*Permet d'ajouter une PERIODE DONNÉE parmis les periodes de l'employé: Utile pour des revendications  */
+	/*Permet d'ajouter une PERIODE DONNï¿½E parmis les periodes de l'employï¿½: Utile pour des revendications  */
 	public boolean addDayInList(MyDay periode) {
 		LinkedList<MyDay> listPeriod = null;
     	if(!dayList.containsKey(periode.getDay())) {
@@ -81,7 +81,7 @@ public abstract class Employer implements Serializable{
     	return (listPeriod == null);
 	}
 	
-	/* retire une periode dans la liste des periode de l'employer a une date donnée*/
+	/* retire une periode dans la liste des periode de l'employer a une date donnï¿½e*/
 	public boolean removeDayInList(int shiftNumber, LocalDate date) {
     	if(dayList.containsKey(date)) {
     		LinkedList<MyDay> listPeriod=dayList.get(date);
@@ -114,7 +114,7 @@ public abstract class Employer implements Serializable{
 	
 	public void punchOut() { // penser a faire une sauvegarde apres le punchOut
 		myDay.end();
-		 addDayInList(); // on ajoute la quart de travail a la liste des quarts de l»'employé
+		 addDayInList(); // on ajoute la quart de travail a la liste des quarts de lï¿½'employï¿½
 		 myDay=new MyDay(); // on instancie un nouveau objet myday
 	}
 	
@@ -134,7 +134,7 @@ public abstract class Employer implements Serializable{
 	
 	public void punchOutForTest(LocalDateTime end) { // penser a faire une sauvegarde apres le punchOut
 		myDay.setEnd(end);
-		addDayInList(myDay); // on ajoute la quart de travail a la liste des quarts de l»'employé
+		addDayInList(myDay); // on ajoute la quart de travail a la liste des quarts de lï¿½'employï¿½
 		 myDay=new MyDay(); // on instancie un nouveau objet myday
 	}
 	
@@ -171,17 +171,17 @@ public abstract class Employer implements Serializable{
 		if(myDay.getStart()==null) info+=" AUCUN ";
 		else {
 			info+=" Jours=> "+myDay.getDay().toString()+" Debut=> "+myDay.getStart().toString()+" Fin=> ";
-			if(myDay.getEnd()==null)info+=" ».».» ";
+			if(myDay.getEnd()==null)info+=" ï¿½.ï¿½.ï¿½ ";
 			else info+=myDay.getEnd().toString();
 		}
 		info+="\n";
 		
-		info+="****** LISTE DE TOUS LES SHIFT EFFECTUÉS**********"+"\n";
+		info+="****** LISTE DE TOUS LES SHIFT EFFECTUï¿½S**********"+"\n";
 		for(HashMap.Entry<LocalDate,LinkedList<MyDay>> entree: dayList.entrySet()) {
 			LocalDate cle=entree.getKey();
 			LinkedList<MyDay> listeShift=entree.getValue();
 			
-			info+="* La Clée=> "+ cle.toString()+"\n";
+			info+="* La Clï¿½e=> "+ cle.toString()+"\n";
 			for(MyDay day:listeShift)
 				info+="    - Jours=> "+day.getDay().toString()+" Debut=> "+day.getStart().toString()+" Fin=> "+day.getEnd().toString()+"\n";
 		}

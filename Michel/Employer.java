@@ -7,6 +7,7 @@ import java.util.*;
 import java.time.*;
 
 public abstract class Employer implements Serializable {
+	protected boolean isWorking = false;
 	protected MyDay myDay = new MyDay();// represente une periode de travail
 	protected String Id;
 	protected String name;
@@ -31,6 +32,10 @@ public abstract class Employer implements Serializable {
 	 */
 
 	/* geter */
+	public boolean getIsWorking(){
+		return isWorking;
+	}
+
 	public String getId() {
 		return Id;
 	}
@@ -137,15 +142,20 @@ public abstract class Employer implements Serializable {
 							// systeme apres chaque punchIn
 		if (myDay.getStart() == null) {
 			// myDay.setDay();
+			isWorking = true;
 			myDay.start();
 			dayWorkersList.addShift(this.getId());
+			addDayInList();
+			additionalShift ++;
 		} else
 			System.out.println("Mr/Mme " + this.getName() + ", Vous devez finir votre  quart de travail ");
 	}
 
 	public void punchOut() { // penser a faire une sauvegarde apres le punchOut
+		isWorking = false;
 		myDay.end();
 		myDay = new MyDay(); // on instancie un nouveau objet myday
+
 	}
 
 	/******** FONCTIONS TESTES P *******/
@@ -189,33 +199,33 @@ public abstract class Employer implements Serializable {
 	}
 
 	/******** permet d'afficher toules informations sur un employe **********/
-	public String toString() {
-		String info = "";
-		info += "* Nom=> " + name + "  ID=> " + Id + "  PASS=> " + passWord + "\n";
-		info += "* Shift en court=> ";
+	// public String toString() {
+	// 	String info = "";
+	// 	info += "* Nom=> " + name + "  ID=> " + Id + "  PASS=> " + passWord + "\n";
+	// 	info += "* Shift en court=> ";
 
-		if (myDay.getStart() == null)
-			info += " AUCUN ";
-		else {
-			info += " Jours=> " + myDay.getDay().toString() + " Debut=> " + myDay.getStart().toString() + " Fin=> ";
-			if (myDay.getEnd() == null)
-				info += " �.�.� ";
-			else
-				info += myDay.getEnd().toString();
-		}
-		info += "\n";
+	// 	if (myDay.getStart() == null)
+	// 		info += " AUCUN ";
+	// 	else {
+	// 		info += " Jours=> " + myDay.getDay().toString() + " Debut=> " + myDay.getStart().toString() + " Fin=> ";
+	// 		if (myDay.getEnd() == null)
+	// 			info += " �.�.� ";
+	// 		else
+	// 			info += myDay.getEnd().toString();
+	// 	}
+	// 	info += "\n";
 
-		info += "****** LISTE DE TOUS LES SHIFT EFFECTU�S**********" + "\n";
-		for (HashMap.Entry<LocalDate, LinkedList<MyDay>> entree : dayList.entrySet()) {
-			LocalDate cle = entree.getKey();
-			LinkedList<MyDay> listeShift = entree.getValue();
+	// 	info += "****** LISTE DE TOUS LES SHIFT EFFECTU�S**********" + "\n";
+	// 	for (HashMap.Entry<LocalDate, LinkedList<MyDay>> entree : dayList.entrySet()) {
+	// 		LocalDate cle = entree.getKey();
+	// 		LinkedList<MyDay> listeShift = entree.getValue();
 
-			info += "* La Cl�e=> " + cle.toString() + "\n";
-			for (MyDay day : listeShift)
-				info += "    - Jours=> " + day.getDay().toString() + " Debut=> " + day.getStart().toString() + " Fin=> "
-						+ day.getEnd().toString() + "\n";
-		}
-		return info;
-	}
+	// 		info += "* La Cl�e=> " + cle.toString() + "\n";
+	// 		for (MyDay day : listeShift)
+	// 			info += "    - Jours=> " + day.getDay().toString() + " Debut=> " + day.getStart().toString() + " Fin=> "
+	// 					+ day.getEnd().toString() + "\n";
+	// 	}
+	// 	return info;
+	// }
 
 }

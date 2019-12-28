@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 public class MyDay{
 
     public MyDay(){
+        this.start = null;
+        this.end = null;
         this.day  = null;
     }
 
@@ -21,6 +23,7 @@ public class MyDay{
     }
     public void start(){
         this.start = LocalDateTime.now();
+        this.day = LocalDate.now();
     }
 
     public void end(){

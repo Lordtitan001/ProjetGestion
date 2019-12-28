@@ -1,5 +1,5 @@
 package Controleur;
-import Interface.FenetreHoraire;
+import Interface.*;
 import Kevin.Code.*;
 import GESTOT_Ressources.Employer;
 
@@ -18,7 +18,7 @@ import java.util.Vector;
 public class ControleurFeneHoraire extends  AbsControleur {
 	
 	//-------LES ATTRIBUTS DU CONTROLEUR---------------------
-	private Employer employer; // ceci represente l'employé sur lequel la fenetre s'execute
+	private Employer employer; // ceci represente l'employï¿½ sur lequel la fenetre s'execute
 
 	//---------------LE CONSTRUCTEUR------------------------------
 	public ControleurFeneHoraire(FenetreHoraire fene, Employer employe) {
@@ -59,7 +59,7 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		for(Map.Entry<LocalDate,LinkedList<MyDay>> entre:listeQuart.entrySet()) { 
 			LocalDate date=entre.getKey();
 			System.out.println("---***----*****---111111111111111111---****-----*****----****-----****----");
-			if(date.isAfter(dateDebut) && date.isBefore(datefin)  ) {// on verifie que la date est dans l'intervalle selectionné
+			if(date.isAfter(dateDebut) && date.isBefore(datefin)  ) {// on verifie que la date est dans l'intervalle selectionnï¿½
 				System.out.println("---***----*****---222222222222---****-----*****----****-----****----");
 				LinkedList<MyDay> listeMyDay=entre.getValue();
 				

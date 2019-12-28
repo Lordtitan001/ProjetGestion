@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Automate",
+            "request": "launch",
+            "mainClass": "Kevin.Code.Automate",
+            "projectName": "ProjetGestion_c01a979"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ControleAcceuil",
+            "request": "launch",
+            "mainClass": "Kevin.Interface.ControleAcceuil",
+            "projectName": "ProjetGestion_c01a979"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Button",
             "request": "launch",
             "mainClass": "Interface.Button",
