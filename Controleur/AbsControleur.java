@@ -15,7 +15,7 @@ public abstract class AbsControleur implements ActionListener,MouseListener,KeyL
 	
 	public  AbsControleur(FenetreHoraire fene) {
 		super();
-		feneHoraire=fene;
+		feneHoraire = fene;
 	}
 
 	@Override

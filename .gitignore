@@ -1,0 +1,6 @@
+*~
+*.class
+$RECYCLE.BIN/
+
+*.log
+log.txt

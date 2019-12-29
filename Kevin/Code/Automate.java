@@ -51,7 +51,6 @@ public class Automate {
                         count++;
                     }
                 }
-
             }
 
             @Override
