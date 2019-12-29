@@ -8,7 +8,7 @@ import Kevin.Code.Company;
 
 public class Systeme {
 
-    public void saveCompany() {
+    public static void saveCompany() {
 
         Company com = new Company();
 
@@ -20,10 +20,10 @@ public class Systeme {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        System.out.println(com.getWorkers());
     }
 
-    public Company restaureCompany() {
+    public static Company restaureCompany() {
 
         try (FileInputStream company = new FileInputStream("company.bin")) {
             ObjectInputStream is = new ObjectInputStream(company);
@@ -31,6 +31,10 @@ public class Systeme {
             Company com = (Company) is.readObject();
             is.close();
 
+            System.out.println(com.getCompanyname());
+            System.out.println(com.getWorkers());
+            System.out.println(com.getManager().getName());
+            System.out.println(com.getNomEmployerNode().getAutoComplete());
             return com;
 
         } catch (Exception e) {

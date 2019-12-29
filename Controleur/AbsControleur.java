@@ -1,6 +1,7 @@
 package Controleur;
 import Interface.*;
 import Kevin.Code.*;
+import Kevin.Interface.AcceuilGUI;
 
 import java.awt.event.*;
 
@@ -12,10 +13,15 @@ public abstract class AbsControleur implements ActionListener,MouseListener,KeyL
 	 * */
 	protected FenetreHoraire feneHoraire;
 	protected Company Gingras;
+	protected AcceuilGUI acceuilGUI;
 	
 	public  AbsControleur(FenetreHoraire fene) {
 		super();
 		feneHoraire = fene;
+	}
+
+	public  AbsControleur(AcceuilGUI acceuilGUI) {
+		this.acceuilGUI = acceuilGUI;
 	}
 
 	@Override

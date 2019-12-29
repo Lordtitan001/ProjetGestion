@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.*;
 import java.awt.Graphics;
 import java.io.File;
+import java.util.HashMap;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.imageio.ImageIO;
@@ -21,13 +22,21 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 
+import Controleur.ControleurAcceuil;
 import Interface.AbsInterfaceContainer;
 import Michel.Employer;
+import Michel.Infirmier;
+
+import java.awt.event.*;
+import Kevin.Code.*;
+
+import Kevin.Interface.AcceuilGUI;
 
 public class AcceuilGUI extends AbsInterfaceContainer {
+  private static int count = 0;
+  ControleurAcceuil controleurAcceuil;
 
   private static final long serialVersionUID = 1L;
-
   private JTextField searchBarField = new JTextField();
   private JPasswordField passwordField = new JPasswordField();
 
@@ -53,10 +62,39 @@ public class AcceuilGUI extends AbsInterfaceContainer {
 
   private Image img;
 
-  public AcceuilGUI(){
-    this.setBackground(Color.RED);
+  public static void main(String[] args) {
+
+    //Systeme.restaureCompany();
+    Employer infirmier1 = new Infirmier("kevin");
+    Employer infirmier2 = new Infirmier("eric");
+    Employer infirmier3 = new Infirmier("kev lems");
+    Employer infirmier4 = new Infirmier("kev mich");
+    Employer infirmier5 = new Infirmier("Infirmiere Num5");
+    Company.addWorker(infirmier1);
+    Company.addWorker(infirmier2);
+    Company.addWorker(infirmier3);
+    Company.addWorker(infirmier4);
+    Company.addWorker(infirmier5);
+
+    JFrame fenetre = new JFrame();
+    fenetre.setTitle("Acceuil");
+    fenetre.setSize(1000, 1000);
+    fenetre.setLocationRelativeTo(null);
+    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    AcceuilGUI acceuilGUI = new AcceuilGUI();
+    acceuilGUI.setInteractions(fenetre);
+    fenetre.setVisible(true);
+
   }
-  public void fenetre(JFrame fen) {
+
+  /*************************** Constructeur ****************************/
+  public AcceuilGUI() {
+    this.setBackground(Color.RED);
+    controleurAcceuil = new ControleurAcceuil(this);
+  }
+
+  public void creerFenetre(JFrame fen) {
     // Definition des LayOuts
     recherchePanel.setLayout(new BoxLayout(recherchePanel, BoxLayout.PAGE_AXIS));
     logInPanel.setLayout(new BoxLayout(logInPanel, BoxLayout.PAGE_AXIS));
@@ -69,7 +107,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     Font errorFont = new Font(Font.MONOSPACED, Font.BOLD, 10);
     Color backGroundColor = new Color(81, 180, 255);
     Color selectedColor = new Color(70, 50, 255);
-    
+
     // Ajout de la barre de recherche
     recherchePanel.add(Box.createRigidArea(new Dimension(0, fen.getHeight() / 4)));
     searchBarField.setBorder(loweredLevelBorder);
@@ -106,7 +144,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     loginBoxPanel.add(passwordField);
     logInErrorLabel.setFont(errorFont);
     logInErrorLabel.setForeground(Color.RED);
-    //logInErrorLabel.setVisible(false);
+    // logInErrorLabel.setVisible(false);
     loginBoxPanel.add(Box.createRigidArea(new Dimension(0, 200)));
     loginBoxPanel.add(logInErrorLabel);
     loginVerticalBoxPanel.add(loginBoxPanel);
@@ -120,26 +158,104 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     try {
       img = ImageIO.read(new File("Kevin/Interface/background.jpg"));
     } catch (Exception e) {
-      //TODO: handle exception
+      // TODO: handle exception
       System.err.println("image not Found");
     }
-    
 
     // acceuilPanel.add(Box.createRigidArea(new Dimension(30, fen.getHeight())));
-    //acceuilPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4));
+    // acceuilPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4));
     acceuilPanel.add(recherchePanel);
     acceuilPanel.add(logInPanel);
     fen.add(acceuilPanel);
 
   }
 
+  public KeyListener prediction() {
+    KeyListener listener = new KeyListener() {
+      Node currentNode = controleurAcceuil.getCompany().getNomEmployerNode();
+      Node lastNode = currentNode.clone();
+
+      @Override
+      public void keyPressed(KeyEvent event) {
+
+        if (event.getKeyCode() != KeyEvent.VK_CAPS_LOCK && event.getKeyCode() != KeyEvent.VK_SHIFT) {
+          if (event.getExtendedKeyCode() == KeyEvent.VK_BACK_SPACE) {
+            if (currentNode == null) {
+              count--;
+              if (count < 1) {
+                currentNode = lastNode.clone();
+                count = 0;
+              }
+              if (currentNode != null) {
+                controleurAcceuil.afficherListeEmployers(currentNode.getListeEmployers());
+              }
+            } else if (currentNode != null) {
+              if (currentNode.getParent() != null) {
+                currentNode = currentNode.getParent();
+                lastNode = currentNode.clone();
+                controleurAcceuil.afficherListeEmployers(currentNode.getListeEmployers());
+              }
+            }
+          } else if (currentNode != null) {
+            currentNode = currentNode.nextChild(event.getKeyChar());
+            if (currentNode != null) {
+              lastNode = currentNode.clone();
+              controleurAcceuil.afficherListeEmployers(currentNode.getListeEmployers());
+            } else {
+              count++;
+            }
+          } else {
+            count++;
+          }
+        }
+      }
+    
+      @Override
+      public void keyReleased(KeyEvent event) {
+      }
+
+      @Override
+      public void keyTyped(KeyEvent event) {
+
+      }
+    };
+    return listener;
+  }
+
+  
+
+  public void setInteractions(JFrame fenetre) {
+
+    getOkButton().addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+
+        if (!getEmployerJList().isSelectionEmpty()) {
+
+          if(!controleurAcceuil.punchInout(getEmployerJList().getSelectedValue(), getPasswordField().getText())){
+            getLogInErrorLabel().setText("User name or password is not correct");
+          }
+        }
+      }
+    });
+
+    getSearchBarField().addKeyListener(prediction());
+
+    getPasswordField().addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        System.out.println("clicked");
+      }
+    });
+
+    creerFenetre(fenetre);
+  }
+
   public JLabel getLogInErrorLabel() {
     return logInErrorLabel;
   }
-  public void paintComponent(Graphics g)
-  {
-      // Draws the img to the BackgroundPanel.
-      g.drawImage(img, 0, 0, null);
+
+  public void paintComponent(Graphics g) {
+    // Draws the img to the BackgroundPanel.
+    g.drawImage(img, 0, 0, null);
   }
 
   public Button getOkButton() {
