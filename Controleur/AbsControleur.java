@@ -1,7 +1,7 @@
 package Controleur;
 import Interface.*;
 import Kevin.Code.*;
-import Kevin.Interface.AcceuilGUI;
+import Interface.AcceuilGUI;
 
 import java.awt.event.*;
 

@@ -2,7 +2,7 @@ package Kevin.Code;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
-import Michel.Employer;
+import GESTOT_Ressources.*;
 import java.awt.*;
 
 public class EmployerListCellRenderer extends DefaultListCellRenderer {

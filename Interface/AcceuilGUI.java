@@ -1,4 +1,4 @@
-package Kevin.Interface;
+package Interface;
 
 import Interface.Button;
 
@@ -24,13 +24,12 @@ import javax.swing.border.Border;
 
 import Controleur.ControleurAcceuil;
 import Interface.AbsInterfaceContainer;
-import Michel.Employer;
-import Michel.Infirmier;
+import GESTOT_Ressources.*;
 
 import java.awt.event.*;
 import Kevin.Code.*;
 
-import Kevin.Interface.AcceuilGUI;
+import Interface.AcceuilGUI;
 
 public class AcceuilGUI extends AbsInterfaceContainer {
   private static int count = 0;

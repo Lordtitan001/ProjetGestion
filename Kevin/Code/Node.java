@@ -3,7 +3,7 @@ package Kevin.Code;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import Michel.Employer;
+import GESTOT_Ressources.*;
 
 public class Node{
     private Node parent;

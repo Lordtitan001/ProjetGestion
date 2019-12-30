@@ -2,8 +2,7 @@ package Kevin.Code;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import Michel.Employer;
-import Michel.Superviseur;;
+import GESTOT_Ressources.*;
 
 public class Company implements Serializable {
 

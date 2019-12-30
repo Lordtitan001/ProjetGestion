@@ -8,8 +8,8 @@ import Interface.AbsInterfaceContainer;
 import Kevin.Code.Company;
 import Kevin.Code.EmployerListCellRenderer;
 import Kevin.Code.Systeme;
-import Kevin.Interface.AcceuilGUI;
-import Michel.Employer;
+import Interface.AcceuilGUI;
+import GESTOT_Ressources.*;
 
 public class ControleurAcceuil extends AbsControleur {
 

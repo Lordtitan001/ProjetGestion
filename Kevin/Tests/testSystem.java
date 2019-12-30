@@ -1,9 +1,7 @@
 package Kevin.Tests;
 
 import Kevin.Code.Company;
-import Michel.Employer;
-import Michel.Infirmier;
-import Michel.Superviseur;
+import GESTOT_Ressources.*;
 import Kevin.Code.Systeme;
 
 public class testSystem {

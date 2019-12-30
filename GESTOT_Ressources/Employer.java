@@ -7,6 +7,7 @@ import java.util.*;
 import java.time.*;
 
 public abstract class Employer implements Serializable{
+	protected boolean isWorking = false;
 	protected MyDay myDay=new MyDay();// represente une periode de travail
 	protected String Id;
 	protected String name;
@@ -25,6 +26,10 @@ public abstract class Employer implements Serializable{
 	}*/
 	
 	/* geter*/
+	public boolean getIsWorking(){
+		return isWorking;
+	}
+
 	public String getId() {return Id;}
 	public String getName() {return name;}
 	public String getPassWord() {return passWord;}
@@ -105,6 +110,7 @@ public abstract class Employer implements Serializable{
 	public void punchIn() {  // pour rappel: il faut penser a faire un systeme de sauvegarde de tout le systeme apres chaque punchIn
 		if(myDay.getStart()==null) {
 			//myDay.setDay();
+			isWorking = true;
 			myDay.start();
 			dayWorkersList.addShift(this.getId());
 		}
@@ -114,6 +120,7 @@ public abstract class Employer implements Serializable{
 	
 	public void punchOut() { // penser a faire une sauvegarde apres le punchOut
 		myDay.end();
+		isWorking = false;
 		 addDayInList(); // on ajoute la quart de travail a la liste des quarts de l�'employ�
 		 myDay=new MyDay(); // on instancie un nouveau objet myday
 	}

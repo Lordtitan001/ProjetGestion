@@ -1,9 +1,9 @@
 package Kevin.Tests;
 import Kevin.Code.Company;
 import Kevin.Code.Day;
-import Michel.Employer;
+import GESTOT_Ressources.*;
 import Kevin.Code.MyDay;
-import Michel.Infirmier;;
+
 
 public class testDay {
 

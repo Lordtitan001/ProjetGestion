@@ -4,3 +4,6 @@ $RECYCLE.BIN/
 
 *.log
 log.txt
+*.bin
+*.form
+package-info.java
