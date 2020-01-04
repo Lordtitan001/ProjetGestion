@@ -77,7 +77,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     TitledBorder passBorder;
     passBorder = BorderFactory.createTitledBorder("Entrer mot de passe");
 
-    testInterface leftPanel = new testInterface();
+    BackgroundPanel leftPanel = new BackgroundPanel();
     leftPanel.setLayout(null);
 
     leftPanel.setPreferredSize(new Dimension(fen.getWidth(), fen.getHeight()));
@@ -115,7 +115,6 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     scrollPane.setBounds(200 + leftInsets.left, 255 + leftInsets.top, (int) sizeScrollPane.getWidth() - 400,
         (int) sizeScrollPane.getHeight());
 
-    passwordField = new JPasswordField("This is the Text Field");
     passwordField.setBackground(whiteColor);
     passwordField.setBorder(passBorder);
     leftPanel.add(passwordField);
