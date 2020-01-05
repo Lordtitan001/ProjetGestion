@@ -2,9 +2,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - TestCompany",
+            "name": "CodeLens (Launch) - testInterface",
             "request": "launch",
-            "mainClass": "GESTOT_Ressources.TestCompany",
+            "mainClass": "Interface.testInterface",
             "projectName": "ProjetGestion_c01a979"
         },
         {

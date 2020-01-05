@@ -3,11 +3,8 @@ package Controleur;
 import java.util.HashMap;
 
 import javax.swing.DefaultListModel;
-
-import Interface.AbsInterfaceContainer;
 import Kevin.Code.Company;
 import Kevin.Code.EmployerListCellRenderer;
-import Kevin.Code.Systeme;
 import Interface.AcceuilGUI;
 import GESTOT_Ressources.*;
 

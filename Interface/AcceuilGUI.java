@@ -1,34 +1,13 @@
 package Interface;
 
-import Interface.Button;
-
-import java.awt.Dimension;
 import java.awt.*;
-import java.awt.Graphics;
-import java.io.File;
-import java.util.HashMap;
-import java.awt.Color;
-import javax.swing.BorderFactory;
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
+import javax.swing.border.TitledBorder;
 import Controleur.ControleurAcceuil;
 import Interface.AbsInterfaceContainer;
 import GESTOT_Ressources.*;
-
 import java.awt.event.*;
 import Kevin.Code.*;
-
 import Interface.AcceuilGUI;
 
 public class AcceuilGUI extends AbsInterfaceContainer {
@@ -39,31 +18,21 @@ public class AcceuilGUI extends AbsInterfaceContainer {
   private JTextField searchBarField = new JTextField();
   private JPasswordField passwordField = new JPasswordField();
 
-  private JPanel recherchePanel = new JPanel();
-  private JPanel logInPanel = new JPanel();
-  private JPanel acceuilPanel = new JPanel();
-  private JPanel navbarPanel = new JPanel();
-  private JPanel loginBoxPanel = new JPanel();
-  private JPanel loginVerticalBoxPanel = new JPanel();
+  private JLabel logInErrorLabel = new JLabel();
+  private JLabel contacter = new JLabel("Contacter le superviseur");
+  private JLabel forgetPassLabel = new JLabel("Mot de passe oublier? ");
 
-  private String spaceString = "                    ";
-  private JLabel inOutLabel = new JLabel(spaceString + "Punch In/Out" + spaceString);
-  private JLabel logInLabel = new JLabel(spaceString + "Ouvrir Session" + spaceString);
-  private JLabel logInErrorLabel = new JLabel("sadsad");
-  private JLabel passwordLabel = new JLabel("Mot de Passe", SwingConstants.LEFT);
-
-  private Border loweredLevelBorder = BorderFactory.createLoweredBevelBorder();
-  private Border raisedLevelBorder = BorderFactory.createRaisedBevelBorder();
   private JList<Employer> employerJList = new JList<>();
   private JScrollPane scrollPane = new JScrollPane(employerJList);
 
-  private Button okButton = new Button("OK");
+  private JButton punchButton = new JButton("Punch");
+  private JButton loginButton = new JButton("Session");
 
   private Image img;
 
   public static void main(String[] args) {
 
-    //Systeme.restaureCompany();
+    // Systeme.restaureCompany();
     Employer infirmier1 = new Infirmier("kevin");
     Employer infirmier2 = new Infirmier("eric");
     Employer infirmier3 = new Infirmier("kev lems");
@@ -89,83 +58,105 @@ public class AcceuilGUI extends AbsInterfaceContainer {
 
   /*************************** Constructeur ****************************/
   public AcceuilGUI() {
-    this.setBackground(Color.RED);
     controleurAcceuil = new ControleurAcceuil(this);
   }
 
   public void creerFenetre(JFrame fen) {
-    // Definition des LayOuts
-    recherchePanel.setLayout(new BoxLayout(recherchePanel, BoxLayout.PAGE_AXIS));
-    logInPanel.setLayout(new BoxLayout(logInPanel, BoxLayout.PAGE_AXIS));
-    acceuilPanel.setLayout(new BoxLayout(acceuilPanel, BoxLayout.LINE_AXIS));
-    loginVerticalBoxPanel.setLayout(new BoxLayout(loginVerticalBoxPanel, BoxLayout.PAGE_AXIS));
 
-    // Font and color
-    Font bigFont = new Font("Serif", Font.BOLD, 15);
-    Font scrollBarFont = new Font("Serif", Font.BOLD, 17);
-    Font errorFont = new Font(Font.MONOSPACED, Font.BOLD, 10);
-    Color backGroundColor = new Color(81, 180, 255);
-    Color selectedColor = new Color(70, 50, 255);
+    JPanel panel = new JPanel();
+    panel.setLayout(null);
+    Insets insets = panel.getInsets();
 
-    // Ajout de la barre de recherche
-    recherchePanel.add(Box.createRigidArea(new Dimension(0, fen.getHeight() / 4)));
-    searchBarField.setBorder(loweredLevelBorder);
-    scrollPane.setBorder(loweredLevelBorder);
-    searchBarField.setPreferredSize(new Dimension(0, 50));
-    searchBarField.setFont(scrollBarFont);
-    recherchePanel.add(searchBarField);
-    // Ajout de la scrollBar
-    scrollPane.setPreferredSize(new Dimension(fen.getWidth() / 2, fen.getHeight() / 2));
-    recherchePanel.add(scrollPane);
-    recherchePanel.add(Box.createRigidArea(new Dimension(0, fen.getHeight() / 4)));
+    Color leftColor = new Color(102, 255, 102);
+    Color rightColor = new Color(51, 153, 255);
+    Color whiteColor = new Color(255, 255, 255);
 
-    // label de punch et de login
-    inOutLabel.setFont(bigFont);
-    logInLabel.setFont(bigFont);
-    inOutLabel.setBorder(raisedLevelBorder);
-    logInLabel.setBorder(raisedLevelBorder);
-    navbarPanel.setLayout(new BoxLayout(navbarPanel, BoxLayout.LINE_AXIS));
-    navbarPanel.add(inOutLabel);
-    navbarPanel.add(logInLabel);
-    loginVerticalBoxPanel.add(Box.createRigidArea(new Dimension(fen.getWidth() / 2, 200)));
-    loginVerticalBoxPanel.add(navbarPanel);
-    loginVerticalBoxPanel.add(Box.createRigidArea(new Dimension(fen.getWidth() / 2, 50)));
+    TitledBorder nameBorder;
+    nameBorder = BorderFactory.createTitledBorder("Entrer le nom");
 
-    // ajout de la box pour le login
-    loginBoxPanel.setBackground(Color.WHITE);
-    loginBoxPanel.setLayout(new BoxLayout(loginBoxPanel, BoxLayout.PAGE_AXIS));
-    loginBoxPanel.setBorder(BorderFactory.createRaisedBevelBorder());
-    loginBoxPanel.add(Box.createRigidArea(new Dimension(0, 30)));
-    passwordLabel.setFont(bigFont);
-    passwordLabel.setPreferredSize(new Dimension(10, 30));
-    loginBoxPanel.add(passwordLabel);
-    passwordField.setPreferredSize(new Dimension(10, 50));
-    loginBoxPanel.add(passwordField);
-    logInErrorLabel.setFont(errorFont);
+    TitledBorder passBorder;
+    passBorder = BorderFactory.createTitledBorder("Entrer mot de passe");
+
+    BackgroundPanel leftPanel = new BackgroundPanel();
+    leftPanel.setLayout(null);
+
+    leftPanel.setPreferredSize(new Dimension(fen.getWidth(), fen.getHeight()));
+    var sizeLeft = leftPanel.getPreferredSize();
+    leftPanel.setBounds(insets.left, insets.top, (int) sizeLeft.getWidth(), (int) sizeLeft.getHeight());
+    panel.add(leftPanel);
+    Insets leftInsets = leftPanel.getInsets();
+
+    // Set the WelcomeText area
+    JLabel welcomLabel = new JLabel("Bienvenue");
+    welcomLabel.setFont(new Font("Monaco", Font.PLAIN, 50));
+    welcomLabel.setOpaque(false);
+    welcomLabel.setForeground(Color.WHITE);
+    leftPanel.add(welcomLabel);
+    welcomLabel.setPreferredSize(new Dimension(leftPanel.getWidth(), 50));
+
+    var sizeTextArea = welcomLabel.getPreferredSize();
+    welcomLabel.setBounds(375 + leftInsets.left, 100 + leftInsets.top, (int) sizeTextArea.getWidth() - 350,
+        (int) sizeTextArea.getHeight());
+
+    // Set the TextFiel
+    searchBarField.setBorder(nameBorder);
+    searchBarField.setBackground(whiteColor);
+    leftPanel.add(searchBarField);
+    searchBarField.setPreferredSize(new Dimension(leftPanel.getWidth(), 50));
+    var sizesearchBarField = searchBarField.getPreferredSize();
+    searchBarField.setBounds(200 + leftInsets.left, 200 + leftInsets.top, (int) sizesearchBarField.getWidth() - 400,
+        (int) sizesearchBarField.getHeight());
+
+    // Set the scrollBar
+    leftPanel.add(scrollPane);
+    scrollPane.setPreferredSize(new Dimension(leftPanel.getWidth(), 300));
+    scrollPane.getViewport().setBackground(new Color(255, 255, 255));
+    var sizeScrollPane = scrollPane.getPreferredSize();
+    scrollPane.setBounds(200 + leftInsets.left, 255 + leftInsets.top, (int) sizeScrollPane.getWidth() - 400,
+        (int) sizeScrollPane.getHeight());
+
+    passwordField.setBackground(whiteColor);
+    passwordField.setBorder(passBorder);
+    leftPanel.add(passwordField);
+    passwordField.setPreferredSize(new Dimension(leftPanel.getWidth(), 50));
+    var sizepasswordField = passwordField.getPreferredSize();
+    passwordField.setBounds(200 + leftInsets.left, 560 + leftInsets.top, (int) sizepasswordField.getWidth() - 400,
+        (int) sizepasswordField.getHeight());
+
+    punchButton.setBackground(leftColor);
+    punchButton.setForeground(Color.white);
+    leftPanel.add(punchButton);
+    punchButton.setPreferredSize(new Dimension(100, 30));
+    var sizePunch = punchButton.getPreferredSize();
+    punchButton.setBounds(200 + leftInsets.left, 620 + leftInsets.top, (int) sizePunch.getWidth(),
+        (int) sizePunch.getHeight());
+
+    loginButton.setBackground(rightColor);
+    loginButton.setForeground(Color.white);
+    leftPanel.add(loginButton);
+    loginButton.setPreferredSize(new Dimension(100, 30));
+    var sizeLogin = loginButton.getPreferredSize();
+    loginButton.setBounds(310 + leftInsets.left, 620 + leftInsets.top, (int) sizeLogin.getWidth(),
+        (int) sizeLogin.getHeight());
+
     logInErrorLabel.setForeground(Color.RED);
-    // logInErrorLabel.setVisible(false);
-    loginBoxPanel.add(Box.createRigidArea(new Dimension(0, 200)));
-    loginBoxPanel.add(logInErrorLabel);
-    loginVerticalBoxPanel.add(loginBoxPanel);
-    loginVerticalBoxPanel.add(okButton);
+    leftPanel.add(logInErrorLabel);
+    logInErrorLabel.setPreferredSize(new Dimension(leftPanel.getWidth(), 10));
+    var sizeErrorLabel = logInErrorLabel.getPreferredSize();
+    logInErrorLabel.setBounds(200 + leftInsets.left, 660 + leftInsets.top, (int) sizeErrorLabel.getWidth(),
+        (int) sizeErrorLabel.getHeight());
 
-    loginVerticalBoxPanel.add(Box.createRigidArea(new Dimension(fen.getWidth() / 2, fen.getHeight() / 4)));
-    loginVerticalBoxPanel.setBackground(backGroundColor);
-    loginVerticalBoxPanel.setBorder(BorderFactory.createLineBorder(backGroundColor, 60));
+    forgetPassLabel.setForeground(Color.WHITE);
+    leftPanel.add(forgetPassLabel);
+    forgetPassLabel.setPreferredSize(new Dimension(leftPanel.getWidth(), 20));
+    var sizeForgetPassLabel = forgetPassLabel.getPreferredSize();
+    forgetPassLabel.setBounds(200 + leftInsets.left, 680 + leftInsets.top, (int) sizeForgetPassLabel.getWidth(), 100);
 
-    logInPanel.add(loginVerticalBoxPanel);
-    try {
-      img = ImageIO.read(new File("Kevin/Interface/background.jpg"));
-    } catch (Exception e) {
-      // TODO: handle exception
-      System.err.println("image not Found");
-    }
+    leftPanel.add(contacter);
+    contacter.setForeground(Color.BLUE);
+    contacter.setBounds(335 + leftInsets.left, 680 + leftInsets.top, (int) sizeForgetPassLabel.getWidth(), 100);
 
-    // acceuilPanel.add(Box.createRigidArea(new Dimension(30, fen.getHeight())));
-    // acceuilPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4));
-    acceuilPanel.add(recherchePanel);
-    acceuilPanel.add(logInPanel);
-    fen.add(acceuilPanel);
+    fen.add(panel);
 
   }
 
@@ -208,7 +199,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
           }
         }
       }
-    
+
       @Override
       public void keyReleased(KeyEvent event) {
       }
@@ -221,16 +212,14 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     return listener;
   }
 
-  
-
   public void setInteractions(JFrame fenetre) {
 
-    getOkButton().addActionListener(new ActionListener() {
+    getPunchButton().addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
 
         if (!getEmployerJList().isSelectionEmpty()) {
 
-          if(!controleurAcceuil.punchInout(getEmployerJList().getSelectedValue(), getPasswordField().getText())){
+          if (!controleurAcceuil.punchInout(getEmployerJList().getSelectedValue(), getPasswordField().getText())) {
             getLogInErrorLabel().setText("User name or password is not correct");
           }
         }
@@ -248,6 +237,14 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     creerFenetre(fenetre);
   }
 
+  public JButton getPunchButton() {
+    return punchButton;
+  }
+
+  public JButton getLoginButton() {
+    return loginButton;
+  }
+
   public JLabel getLogInErrorLabel() {
     return logInErrorLabel;
   }
@@ -257,24 +254,12 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     g.drawImage(img, 0, 0, null);
   }
 
-  public Button getOkButton() {
-    return okButton;
-  }
-
   public JTextField getSearchBarField() {
     return searchBarField;
   }
 
   JPasswordField getPasswordField() {
     return passwordField;
-  }
-
-  public JLabel getInOutLabel() {
-    return inOutLabel;
-  }
-
-  public JLabel getLogInLabel() {
-    return logInLabel;
   }
 
   public JList<Employer> getEmployerJList() {
