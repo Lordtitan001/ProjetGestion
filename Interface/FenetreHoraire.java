@@ -40,7 +40,7 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 		private JComboBox anneeOut;
 		
 		/* liste Horaire*/
-		private Vector<JPanel> listeHoraire=new Vector<JPanel>(); // representre la liste de tous les labels des horaire de l'employé
+		private Vector<JPanel> listeHoraire=new Vector<JPanel>(); // representre la liste de tous les labels des horaire de l'employï¿½
 		
 		private int lX;
 		private int lY;
@@ -288,7 +288,7 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 			JPanel panelDebutDate =new JPanel(); panelDebutDate.setOpaque(false);
 			JPanel panelFinDate =new JPanel(); panelFinDate.setOpaque(false);
 			
-			JLabel debut=new JLabel("Début ");
+			JLabel debut=new JLabel("Dï¿½but ");
 			JLabel fin=new JLabel("Fin    ");
 			debut.setFont(font);
 			fin.setFont(font);
@@ -501,11 +501,11 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 		//********** fonction pour tester affichage fenetre*** A SUPPRIMER**********/
 		
 		public void affichageHoraire(Vector<LocalDateTime> deb,Vector<LocalDateTime> fin,Vector<Double> heures) {
-			if(!(deb.size()==fin.size() && fin.size()==heures.size())) new FenetreErreur("Un des noeuds de votre liste de quart de travail est erroné!!!").afficher(FenetreErreur.ERREUR);
+			if(!(deb.size()==fin.size() && fin.size()==heures.size())) new FenetreErreur("Un des noeuds de votre liste de quart de travail est erronï¿½!!!").afficher(FenetreErreur.ERREUR);
 			
 			Double totalHeure=0.0;
 			for(int i=0;i<deb.size();i++) {
-				listeHoraire.addElement(ajoutHoraire(deb.elementAt(i),fin.elementAt(i),heures.elementAt(i)));// representre la liste de tous les labels des horaire de l'employé
+				listeHoraire.addElement(ajoutHoraire(deb.elementAt(i),fin.elementAt(i),heures.elementAt(i)));// representre la liste de tous les labels des horaire de l'employï¿½
 			    totalHeure+=heures.elementAt(i);
 			}
 			String total=""+totalHeure;

@@ -3,6 +3,9 @@ package Interface;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import Controleur.ControleurAcceuil;
 import Interface.AbsInterfaceContainer;
 import GESTOT_Ressources.*;
@@ -25,7 +28,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
   private JList<Employer> employerJList = new JList<>();
   private JScrollPane scrollPane = new JScrollPane(employerJList);
 
-  private JButton punchButton = new JButton("Punch");
+  private JButton punchButton = new JButton("Punch In");
   private JButton loginButton = new JButton("Session");
 
   private Image img;
@@ -49,23 +52,23 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     fenetre.setSize(1000, 1000);
     fenetre.setLocationRelativeTo(null);
     fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    AcceuilGUI acceuilGUI = new AcceuilGUI();
-    acceuilGUI.setInteractions(fenetre);
+    AcceuilGUI acceuilGUI = new AcceuilGUI(fenetre.getSize());
+    fenetre.add(acceuilGUI);
     fenetre.setVisible(true);
 
   }
 
   /*************************** Constructeur ****************************/
-  public AcceuilGUI() {
+  public AcceuilGUI(Dimension dimension) {
     controleurAcceuil = new ControleurAcceuil(this);
+    this.setInteractions(dimension);
   }
 
-  public void creerFenetre(JFrame fen) {
+  public void creerFenetre(Dimension dimension) {
 
-    JPanel panel = new JPanel();
-    panel.setLayout(null);
-    Insets insets = panel.getInsets();
+    // JPanel panel = new JPanel();
+    this.setLayout(null);
+    Insets insets = this.getInsets();
 
     Color leftColor = new Color(102, 255, 102);
     Color rightColor = new Color(51, 153, 255);
@@ -80,10 +83,10 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     BackgroundPanel leftPanel = new BackgroundPanel();
     leftPanel.setLayout(null);
 
-    leftPanel.setPreferredSize(new Dimension(fen.getWidth(), fen.getHeight()));
+    leftPanel.setPreferredSize(dimension);
     var sizeLeft = leftPanel.getPreferredSize();
     leftPanel.setBounds(insets.left, insets.top, (int) sizeLeft.getWidth(), (int) sizeLeft.getHeight());
-    panel.add(leftPanel);
+    this.add(leftPanel);
     Insets leftInsets = leftPanel.getInsets();
 
     // Set the WelcomeText area
@@ -156,7 +159,8 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     contacter.setForeground(Color.BLUE);
     contacter.setBounds(335 + leftInsets.left, 680 + leftInsets.top, (int) sizeForgetPassLabel.getWidth(), 100);
 
-    fen.add(panel);
+    // return panel;
+    // fen.add(panel);
 
   }
 
@@ -212,7 +216,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     return listener;
   }
 
-  public void setInteractions(JFrame fenetre) {
+  public void setInteractions(Dimension dimension) {
 
     getPunchButton().addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -234,7 +238,36 @@ public class AcceuilGUI extends AbsInterfaceContainer {
       }
     });
 
-    creerFenetre(fenetre);
+    getLoginButton().addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        if (!getEmployerJList().isSelectionEmpty()) {
+          controleurAcceuil.ouvrirSession(getEmployerJList().getSelectedValue());
+        } else {
+          System.out.println("Aucun employer selectioner");
+        }
+      }
+    });
+
+    getEmployerJList().addListSelectionListener(new ListSelectionListener() {
+      public void actionPerformed(ActionEvent e) {
+
+      }
+
+      @Override
+      public void valueChanged(ListSelectionEvent e) {
+        // TODO Auto-generated method stub
+        System.out.println(getEmployerJList().getSelectedValue().getName());
+        if (getEmployerJList().getSelectedValue().getIsWorking()) {
+          getPunchButton().setText("Punch Out");
+          getPunchButton().setBackground(Color.RED);
+        } else {
+          getPunchButton().setText("Punch in");
+          getPunchButton().setBackground(Color.GREEN);
+        }
+      }
+    });
+
+    creerFenetre(dimension);
   }
 
   public JButton getPunchButton() {

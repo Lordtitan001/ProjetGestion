@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - SystemGUI",
+            "request": "launch",
+            "mainClass": "Interface.SystemGUI",
+            "projectName": "ProjetGestion_c01a979"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - testInterface",
             "request": "launch",
             "mainClass": "Interface.testInterface",
