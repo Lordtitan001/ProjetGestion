@@ -65,7 +65,7 @@ public class TestCompany {
 		/******************  ON CREE UNE COMPAGNIE ***********************/
 		 Company maCompagnie=new Company();
 						 
-				 /**********************  ON CREE DES EMPLOYÉS DE LA COMPAGNIE***********************/
+				 /**********************  ON CREE DES EMPLOYï¿½S DE LA COMPAGNIE***********************/
 				 
 				 Employer infirmier1=new Infirmier("Infirmiere Num1");
 				 maCompagnie.addWorker(infirmier1);
