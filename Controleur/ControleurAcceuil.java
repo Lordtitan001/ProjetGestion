@@ -10,6 +10,9 @@ import Interface.FenetreHoraire;
 import Interface.SystemGUI;
 import GESTOT_Ressources.*;
 
+import java.awt.*;
+import javax.swing.*;
+
 public class ControleurAcceuil extends AbsControleur {
 
     private Company company = new Company();
@@ -31,6 +34,7 @@ public class ControleurAcceuil extends AbsControleur {
                 emp.punchOut();
             }
             // Systeme.saveCompany();
+            acceuilGUI.getLogInErrorLabel().setText("");
             return true;
         } else
             return false;
@@ -54,11 +58,30 @@ public class ControleurAcceuil extends AbsControleur {
         acceuilGUI.getEmployerJList().setModel(model);
     }
 
-    public void ouvrirSession(Employer employer) {
+    public boolean ouvrirSession(Employer employer, String password) {
+
+        if(employer.getPassWord().compareTo(password) == 0){
         FenetreHoraire fHoraire = new FenetreHoraire(acceuilGUI.getWidth(), acceuilGUI.getHeight());
         AbsControleur controleurHoraire = new ControleurFeneHoraire(fHoraire, employer);
         SystemGUI.getContentPanel().add(fHoraire, "horaire");
         SystemGUI.getCardLayout().show(SystemGUI.getContentPanel(), "horaire");
+        acceuilGUI.getPasswordField().setText("");
+        acceuilGUI.getLogInErrorLabel().setText("");
+        return true;
+        }
+        else{
+            return false;
+        }
     }
+
+    public void changeButton(){
+        if (acceuilGUI.getEmployerJList().getSelectedValue().getIsWorking()) {
+            acceuilGUI.getPunchButton().setText("Punch Out");
+            acceuilGUI.getPunchButton().setBackground(Color.RED);
+        } else {
+            acceuilGUI.getPunchButton().setText("Punch in");
+            acceuilGUI.getPunchButton().setBackground(Color.GREEN);
+        }
+      }
 
 }

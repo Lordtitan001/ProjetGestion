@@ -1,14 +1,9 @@
 package Interface;
 
 import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
 
 public class BackgroundPanel extends AbsInterfaceContainer {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -18,7 +13,6 @@ public class BackgroundPanel extends AbsInterfaceContainer {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         int w = getWidth();
         int h = getHeight();
-        GradientPaint blackToGray = new GradientPaint(0, 0, Color.BLACK, 300, 300, Color.LIGHT_GRAY);
         GradientPaint blueToGreen = new GradientPaint(0, 0, new Color(51, 153, 255), 900, 900,
                 new Color(153, 255, 204));
         g2d.setPaint(blueToGreen);

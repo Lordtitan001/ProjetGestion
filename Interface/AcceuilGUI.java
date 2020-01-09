@@ -14,24 +14,21 @@ import Kevin.Code.*;
 import Interface.AcceuilGUI;
 
 public class AcceuilGUI extends AbsInterfaceContainer {
-  private static int count = 0;
-  ControleurAcceuil controleurAcceuil;
-
   private static final long serialVersionUID = 1L;
-  private JTextField searchBarField = new JTextField();
+
+  ControleurAcceuil controleurAcceuil;
+  private static int count = 0;
+
   private JPasswordField passwordField = new JPasswordField();
+  
+  private SearchName searchName = new SearchName();
 
   private JLabel logInErrorLabel = new JLabel();
   private JLabel contacter = new JLabel("Contacter le superviseur");
   private JLabel forgetPassLabel = new JLabel("Mot de passe oublier? ");
 
-  private JList<Employer> employerJList = new JList<>();
-  private JScrollPane scrollPane = new JScrollPane(employerJList);
-
   private JButton punchButton = new JButton("Punch In");
   private JButton loginButton = new JButton("Session");
-
-  private Image img;
 
   public static void main(String[] args) {
 
@@ -66,16 +63,12 @@ public class AcceuilGUI extends AbsInterfaceContainer {
 
   public void creerFenetre(Dimension dimension) {
 
-    // JPanel panel = new JPanel();
     this.setLayout(null);
     Insets insets = this.getInsets();
 
     Color leftColor = new Color(102, 255, 102);
     Color rightColor = new Color(51, 153, 255);
     Color whiteColor = new Color(255, 255, 255);
-
-    TitledBorder nameBorder;
-    nameBorder = BorderFactory.createTitledBorder("Entrer le nom");
 
     TitledBorder passBorder;
     passBorder = BorderFactory.createTitledBorder("Entrer mot de passe");
@@ -101,23 +94,14 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     welcomLabel.setBounds(375 + leftInsets.left, 100 + leftInsets.top, (int) sizeTextArea.getWidth() - 350,
         (int) sizeTextArea.getHeight());
 
-    // Set the TextFiel
-    searchBarField.setBorder(nameBorder);
-    searchBarField.setBackground(whiteColor);
-    leftPanel.add(searchBarField);
-    searchBarField.setPreferredSize(new Dimension(leftPanel.getWidth(), 50));
-    var sizesearchBarField = searchBarField.getPreferredSize();
-    searchBarField.setBounds(200 + leftInsets.left, 200 + leftInsets.top, (int) sizesearchBarField.getWidth() - 400,
-        (int) sizesearchBarField.getHeight());
+    // Set the SearchName
+    searchName = new SearchName(new Dimension(leftPanel.getWidth() - 400, 350));
+    var sizeSearchName = searchName.getPreferredSize();
+    searchName.setBounds(200 + leftInsets.left, 200 + leftInsets.top, (int) sizeSearchName.getWidth(),
+        (int) sizeSearchName.getHeight());
+    leftPanel.add(searchName);
 
-    // Set the scrollBar
-    leftPanel.add(scrollPane);
-    scrollPane.setPreferredSize(new Dimension(leftPanel.getWidth(), 300));
-    scrollPane.getViewport().setBackground(new Color(255, 255, 255));
-    var sizeScrollPane = scrollPane.getPreferredSize();
-    scrollPane.setBounds(200 + leftInsets.left, 255 + leftInsets.top, (int) sizeScrollPane.getWidth() - 400,
-        (int) sizeScrollPane.getHeight());
-
+    //set The passWordField
     passwordField.setBackground(whiteColor);
     passwordField.setBorder(passBorder);
     leftPanel.add(passwordField);
@@ -126,6 +110,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     passwordField.setBounds(200 + leftInsets.left, 560 + leftInsets.top, (int) sizepasswordField.getWidth() - 400,
         (int) sizepasswordField.getHeight());
 
+    //set The Punch button
     punchButton.setBackground(leftColor);
     punchButton.setForeground(Color.white);
     leftPanel.add(punchButton);
@@ -134,6 +119,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     punchButton.setBounds(200 + leftInsets.left, 620 + leftInsets.top, (int) sizePunch.getWidth(),
         (int) sizePunch.getHeight());
 
+    //set The Login button
     loginButton.setBackground(rightColor);
     loginButton.setForeground(Color.white);
     leftPanel.add(loginButton);
@@ -142,25 +128,25 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     loginButton.setBounds(310 + leftInsets.left, 620 + leftInsets.top, (int) sizeLogin.getWidth(),
         (int) sizeLogin.getHeight());
 
+    //set The error label
     logInErrorLabel.setForeground(Color.RED);
     leftPanel.add(logInErrorLabel);
-    logInErrorLabel.setPreferredSize(new Dimension(leftPanel.getWidth(), 10));
+    logInErrorLabel.setPreferredSize(new Dimension(leftPanel.getWidth(), 20));
     var sizeErrorLabel = logInErrorLabel.getPreferredSize();
     logInErrorLabel.setBounds(200 + leftInsets.left, 660 + leftInsets.top, (int) sizeErrorLabel.getWidth(),
         (int) sizeErrorLabel.getHeight());
 
+    //set The forgetPassLabel label
     forgetPassLabel.setForeground(Color.WHITE);
     leftPanel.add(forgetPassLabel);
     forgetPassLabel.setPreferredSize(new Dimension(leftPanel.getWidth(), 20));
     var sizeForgetPassLabel = forgetPassLabel.getPreferredSize();
     forgetPassLabel.setBounds(200 + leftInsets.left, 680 + leftInsets.top, (int) sizeForgetPassLabel.getWidth(), 100);
 
+    //Add the panel
     leftPanel.add(contacter);
     contacter.setForeground(Color.BLUE);
     contacter.setBounds(335 + leftInsets.left, 680 + leftInsets.top, (int) sizeForgetPassLabel.getWidth(), 100);
-
-    // return panel;
-    // fen.add(panel);
 
   }
 
@@ -218,14 +204,22 @@ public class AcceuilGUI extends AbsInterfaceContainer {
 
   public void setInteractions(Dimension dimension) {
 
+    creerFenetre(dimension);
+
     getPunchButton().addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
 
         if (!getEmployerJList().isSelectionEmpty()) {
 
           if (!controleurAcceuil.punchInout(getEmployerJList().getSelectedValue(), getPasswordField().getText())) {
-            getLogInErrorLabel().setText("User name or password is not correct");
+            getLogInErrorLabel().setText("Le nom d'utilisateur ou le mot de passe est incorrect");
           }
+          else{
+            controleurAcceuil.changeButton();
+          }
+        }
+        else{
+          getLogInErrorLabel().setText("Veuillez selectionner un nom");
         }
       }
     });
@@ -241,33 +235,23 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     getLoginButton().addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         if (!getEmployerJList().isSelectionEmpty()) {
-          controleurAcceuil.ouvrirSession(getEmployerJList().getSelectedValue());
+          if(!controleurAcceuil.ouvrirSession(getEmployerJList().getSelectedValue(), getPasswordField().getText())){
+            getLogInErrorLabel().setText("Le nom d'utilisateur ou le mot de passe est incorrect");
+          }
         } else {
-          System.out.println("Aucun employer selectioner");
+          getLogInErrorLabel().setText("Veuillez selectionner un nom");
         }
       }
     });
 
     getEmployerJList().addListSelectionListener(new ListSelectionListener() {
-      public void actionPerformed(ActionEvent e) {
-
-      }
-
       @Override
       public void valueChanged(ListSelectionEvent e) {
-        // TODO Auto-generated method stub
-        System.out.println(getEmployerJList().getSelectedValue().getName());
-        if (getEmployerJList().getSelectedValue().getIsWorking()) {
-          getPunchButton().setText("Punch Out");
-          getPunchButton().setBackground(Color.RED);
-        } else {
-          getPunchButton().setText("Punch in");
-          getPunchButton().setBackground(Color.GREEN);
-        }
+        controleurAcceuil.changeButton();
       }
     });
 
-    creerFenetre(dimension);
+    
   }
 
   public JButton getPunchButton() {
@@ -282,25 +266,20 @@ public class AcceuilGUI extends AbsInterfaceContainer {
     return logInErrorLabel;
   }
 
-  public void paintComponent(Graphics g) {
-    // Draws the img to the BackgroundPanel.
-    g.drawImage(img, 0, 0, null);
-  }
-
   public JTextField getSearchBarField() {
-    return searchBarField;
+    return searchName.getSearchBarField();
   }
 
-  JPasswordField getPasswordField() {
+  public JPasswordField getPasswordField() {
     return passwordField;
   }
 
   public JList<Employer> getEmployerJList() {
-    return employerJList;
+    return searchName.getEmployerJList();
   }
 
   public JScrollPane getScrollPane() {
-    return scrollPane;
+    return searchName.getScrollPane();
   }
 
 }

@@ -11,7 +11,7 @@ public class Company implements Serializable {
     public Company() {
     }
 
-    private static HashMap<String , Employer> workers = new HashMap<String, Employer>();
+    private static HashMap<String, Employer> workers = new HashMap<String, Employer>();
     private static Superviseur manager = new Superviseur("Manager");
     private static final String companyName = "KevCorp";
     private static Node nomEmployerNode = new Node(null, ' ');
@@ -40,7 +40,6 @@ public class Company implements Serializable {
             return true;
         }
 
-
     }
 
     public Node getNomEmployerNode() {
@@ -62,14 +61,16 @@ public class Company implements Serializable {
     public static void updateArbreNom() {
         for (var entrySet : workers.entrySet()) {
             Node currentNode = nomEmployerNode;
-          for (char val : entrySet.getValue().getName().toCharArray()) {
-            if (currentNode.nextChild(val) == null) {
-              currentNode.getAdjaceNodes().add(new Node(currentNode, val));
+            for (char val : entrySet.getValue().getName().toCharArray()) {
+                if (currentNode.nextChild(val) == null) {
+                    currentNode.getAdjaceNodes().add(new Node(currentNode, val));
+                }
+                currentNode.getListeEmployers().put(entrySet.getKey(), entrySet.getValue());
+                currentNode.getAutoComplete().add(entrySet.getValue().getName());
+                currentNode = currentNode.nextChild(val);
             }
             currentNode.getListeEmployers().put(entrySet.getKey(), entrySet.getValue());
             currentNode.getAutoComplete().add(entrySet.getValue().getName());
-            currentNode = currentNode.nextChild(val);
-          }
         }
     }
 }

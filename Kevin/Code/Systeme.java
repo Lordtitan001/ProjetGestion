@@ -20,7 +20,6 @@ public class Systeme {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(com.getWorkers());
     }
 
     public static Company restaureCompany() {
@@ -31,10 +30,6 @@ public class Systeme {
             Company com = (Company) is.readObject();
             is.close();
 
-            System.out.println(com.getCompanyname());
-            System.out.println(com.getWorkers());
-            System.out.println(com.getManager().getName());
-            System.out.println(com.getNomEmployerNode().getAutoComplete());
             return com;
 
         } catch (Exception e) {

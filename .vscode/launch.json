@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - PannelFormulaireInscription",
+            "request": "launch",
+            "mainClass": "Interface.PannelFormulaireInscription",
+            "projectName": "ProjetGestion_Gingras"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - testSystem",
+            "request": "launch",
+            "mainClass": "Kevin.Tests.testSystem",
+            "projectName": "ProjetGestion_Gingras"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SystemGUI",
+            "request": "launch",
+            "mainClass": "Interface.SystemGUI",
+            "projectName": "ProjetGestion_Gingras"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - AcceuilGUI",
+            "request": "launch",
+            "mainClass": "Interface.AcceuilGUI",
+            "projectName": "ProjetGestion_Gingras"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - SystemGUI",
             "request": "launch",
             "mainClass": "Interface.SystemGUI",
