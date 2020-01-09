@@ -205,9 +205,13 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 			 
 			 this.add(panelCentral);
 			 panelCentral.setLocation(0, 40);
-			 //panelCentral.setBackground(Color.gray);
-			// panelCentral.setBorder(new LineBorder (Color.black, 2));
 			 addPanelIntervalePeriode();
+			 addPanelAffichagePeriode();
+			 addEttiquette();
+		}
+		
+		public void sessionInfirmier() {
+			addPanelIntervalePeriode();
 			 addPanelAffichagePeriode();
 			 addEttiquette();
 		}
