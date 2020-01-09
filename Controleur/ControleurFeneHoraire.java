@@ -16,7 +16,7 @@ import java.util.Vector;
 public class ControleurFeneHoraire extends  AbsControleur {
 	
 	//-------LES ATTRIBUTS DU CONTROLEUR---------------------
-	private Employer employer; // ceci represente l'employé sur lequel la fenetre s'execute
+	private Employer employer; // ceci represente l'employï¿½ sur lequel la fenetre s'execute
 
 	//---------------LE CONSTRUCTEUR------------------------------
 	public ControleurFeneHoraire(FenetreHoraire fene, Employer employe) {
@@ -53,7 +53,7 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		
 		/*Ici on verifie si l'intervalle de date est conforme*/
 		if(datefin.compareTo(dateDebut)<=0) {
-			new FenetreErreur("la Date de début inferieur à la date de fin").afficher(FenetreErreur.ERREUR);
+			new FenetreErreur("la Date de dï¿½but inferieur ï¿½ la date de fin").afficher(FenetreErreur.ERREUR);
 			return null;
 		}
 		
@@ -70,7 +70,7 @@ public class ControleurFeneHoraire extends  AbsControleur {
 			LocalDate date=entre.getKey();
 			System.out.println("---***--- INFO EMPLOYER-------"+listeQuart.size()+"----"+employer.getName());
 			//System.out.println("---***----*****-- LA DATE -----**-- "+date);
-			if(dateDebut.compareTo(date)<=0 && date.compareTo(datefin)<=0  ) {// on verifie que la date est dans l'intervalle selectionné
+			if(dateDebut.compareTo(date)<=0 && date.compareTo(datefin)<=0  ) {// on verifie que la date est dans l'intervalle selectionnï¿½
 				
 				
 				LinkedList<MyDay> listeMyDay=entre.getValue();
@@ -141,26 +141,29 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		
 		//--------------ACTION DU BOUTTON QUITTER DE LA FENETRE HORAIRE ----------------
 		if(e.getSource().equals(feneHoraire.getBoutQuitterHoraire())) {
-			System.out.println("------------------------ VOUS AVEZ CLIKER SUR LE BOUTTON QUITTER DE LA FENETRE HORAIRE");
-			feneHoraire.viderContenuAffichagePeriode();
+			// System.out.println("------------------------ VOUS AVEZ CLIKER SUR LE BOUTTON QUITTER DE LA FENETRE HORAIRE");
+			// feneHoraire.viderContenuAffichagePeriode();
 			
-			feneHoraire.getMoisIn().setSelectedItem("MM");
-			feneHoraire.getJourIn().setSelectedItem("JJ");
-			int anneCourante= LocalDate.now().getYear();
-			feneHoraire.getAnneeIn().setSelectedItem(""+anneCourante);
+			// feneHoraire.getMoisIn().setSelectedItem("MM");
+			// feneHoraire.getJourIn().setSelectedItem("JJ");
+			// int anneCourante= LocalDate.now().getYear();
+			// feneHoraire.getAnneeIn().setSelectedItem(""+anneCourante);
 			
-			feneHoraire.getMoisOut().setSelectedItem("MM");
-			feneHoraire.getJourOut().setSelectedItem("JJ");
-			feneHoraire.getAnneeOut().setSelectedItem(""+anneCourante);
+			// feneHoraire.getMoisOut().setSelectedItem("MM");
+			// feneHoraire.getJourOut().setSelectedItem("JJ");
+			// feneHoraire.getAnneeOut().setSelectedItem(""+anneCourante);
 			// IL FAUT CONTINUER POUR FAIRE LA TRANSITION A LA FENETRE PRINCIPALE
+
+			SystemGUI.getCardLayout().show(SystemGUI.getContentPanel(), "acceuil");
 		}
 		
 		if(e.getSource().equals(feneHoraire.getBoutPunchOutHoraire())) {
-			
+			ControleurAcceuil.punchInout(employer);
+			//Utiliser getIsWorking pour changer l'affichage du boutton
 		}
 	}
 	
-	 //Méthode appelée lors du survol de la souris
+	 //Mï¿½thode appelï¿½e lors du survol de la souris
 	  public void mouseEntered(MouseEvent e) { 
 		  Button bout=(Button)e.getSource();
 		  if(bout.getText().contains("Quitter"))  bout.setCouleur(Color.red);
@@ -169,7 +172,7 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		  System.out.println("************ EVENEMENT DU BOUTON CLIKER ****************"+bout.getText());
 	  }
 
-	  //Méthode appelée lorsque la souris sort de la zone du bouton
+	  //Mï¿½thode appelï¿½e lorsque la souris sort de la zone du bouton
 	  public void mouseExited(MouseEvent e) {
 		  Button bout=(Button)e.getSource();
 		  bout.setCouleur(Color.white);
