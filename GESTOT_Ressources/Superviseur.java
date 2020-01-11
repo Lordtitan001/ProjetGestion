@@ -12,6 +12,7 @@ public class Superviseur extends Employer{
 		Employer.nbWorkers++;
 	    this.name=name;
 	    Id=setId();
+	    fonction=Employer.FONCTION_SUPERVISOR;
 	}
 	
 	/*// permet d'ajouter une periodes parmis la liste des periodes de l'employé

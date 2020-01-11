@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -25,6 +26,8 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 		private JLabel etiquetteNomEmployer;
 		private JLabel etiquettePrenomEmployer;
 		private JLabel etiquetteIdEmployer;
+		private JLabel etiquetteNom;
+		private JLabel etiquetteId;
 		
 		/* Mes boutons*/
 		private Button boutPunchOutHoraire;
@@ -44,6 +47,7 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 		
 		private int lX;
 		private int lY;
+		private final static int border=5;
 		
 	//-------------MES SETTERS ET GETTERS---------------------------
 
@@ -205,54 +209,67 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 			 
 			 this.add(panelCentral);
 			 panelCentral.setLocation(0, 40);
-			 addPanelIntervalePeriode();
-			 addPanelAffichagePeriode();
-			 addEttiquette();
+			 sessionGenerale();
+			 //sessionSuperviseur();
 		}
 		
-		public void sessionInfirmier() {
+		//--------ajout de la session generale pour tout les utilisateurs
+		public void sessionGenerale() {
 			addPanelIntervalePeriode();
 			 addPanelAffichagePeriode();
 			 addEttiquette();
 		}
+		
+		//--------ajout de la session liee aux superviseurs
+		public void sessionSuperviseur() {
+			
+			int dimX=panelIntervalePeriode.getWidth();
+			int dimY=panelCentral.getHeight()-((etiquetteNom.getHeight()*2) + panelIntervalePeriode.getHeight() + (4*border));
+			
+			 int posX=border;
+			 int posY=(etiquetteNom.getHeight()*2)+ (2*border);
+			 panelIntervalePeriode.setLocation(posX, posY);
+			 
+			 JPanel panelAcceuil=new SearchName(new Dimension(dimX,dimY));
+			 panelCentral.add(panelAcceuil);
+			 
+			 posY= posY + panelIntervalePeriode.getHeight() + border;
+			 panelAcceuil.setLocation(posX, posY);
+			 
+		}
+		
+		
 		
 		public void addEttiquette() {
 			int x=panelIntervalePeriode.getWidth();
 			int y=30;
 			Font font=new Font("lucida bright",Font.BOLD|Font.ITALIC,14 );
 			
-			JLabel etiquetteNom=new JLabel("Nom: ");
+			etiquetteNom=new JLabel("Nom: ");
 			etiquetteNom.setFont(font);
 			etiquetteNom.setForeground(Color.black);
-			etiquetteNom.setBounds(5,5,x/5,y);
+			etiquetteNom.setBounds(border,border,x/5,y);
 			panelCentral.add(etiquetteNom); 
 			
-			JLabel etiquetteId=new JLabel("Identifiant: ");
+			etiquetteId=new JLabel("Identifiant: ");
 			etiquetteId.setFont(font);
 			etiquetteId.setForeground(Color.black);
-			etiquetteId.setBounds(5,y+5,x/3,y);
+			etiquetteId.setBounds(border,y+border,x/3,y);
 			panelCentral.add(etiquetteId); 
 			
 			font=new Font("lucida bright",Font.BOLD|Font.ITALIC,12 );
 			etiquetteNomEmployer=new JLabel("--");
 			etiquetteNomEmployer.setFont(font);
 			etiquetteNomEmployer.setForeground(Color.blue);
-			etiquetteNomEmployer.setBounds(5+x/5,5,x*4/5,y);
+			etiquetteNomEmployer.setBounds(border+x/border,5,x*4/5,y);
 			panelCentral.add(etiquetteNomEmployer); 
 			
 			etiquetteIdEmployer=new JLabel("--");
 			etiquetteIdEmployer.setFont(font);
 			etiquetteIdEmployer.setForeground(Color.blue);
-			etiquetteIdEmployer.setBounds(5+x/3,y+5,x*2/3,y);
+			etiquetteIdEmployer.setBounds(border+x/3,y+border,x*2/3,y);
 			panelCentral.add(etiquetteIdEmployer); 
 			
-			/* etiquetteTotalHeure=new JLabel("--- Hrs"); 
-			    etiquetteTotalHeure.setFont(font);
-			    etiquetteTotalHeure.setForeground(Color.blue);
-			    int xEtiq4=xEtiq2+50;
-			    etiquetteTotalHeure.setBounds(xEtiq4,yLabel,x*3/5,hautLabel);
-			    etiquetteTotalHeure.setBorder(BorderFactory.createEtchedBorder()); //BorderFactory.createRaisedSoftBevelBorder()
-			    panelCentral.add(etiquetteTotalHeure); */
 		}
 		
 		public void addBarMenu() {
@@ -265,11 +282,11 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 			barMenu.setBackground(Color.lightGray);
 			
 			boutQuitterHoraire=new Button("Quitter");
-			boutQuitterHoraire.setLocation(lX-155, 5);
+			boutQuitterHoraire.setLocation(lX-155, border);
 			barMenu.add(boutQuitterHoraire);
 			
 			boutPunchOutHoraire=new Button("Punch Out");
-			boutPunchOutHoraire.setLocation(lX-(2*155), 5);
+			boutPunchOutHoraire.setLocation(lX-(2*155), border);
 			barMenu.add(boutPunchOutHoraire);
 			
 		}
@@ -292,7 +309,7 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 			JPanel panelDebutDate =new JPanel(); panelDebutDate.setOpaque(false);
 			JPanel panelFinDate =new JPanel(); panelFinDate.setOpaque(false);
 			
-			JLabel debut=new JLabel("Dï¿½but ");
+			JLabel debut=new JLabel("Début ");
 			JLabel fin=new JLabel("Fin    ");
 			debut.setFont(font);
 			fin.setFont(font);
@@ -427,7 +444,7 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 		    panelAffichagePeriode.add(etiquette3);
 		    
 		    
-		    etiquetteTotalHeure=new JLabel("--- Hrs"); 
+		    etiquetteTotalHeure=new JLabel("00:00"+"  (H:M)"); 
 		    etiquetteTotalHeure.setFont(font);
 		    etiquetteTotalHeure.setForeground(Color.blue);
 		    int xEtiq4=xEtiq2+50;
@@ -442,15 +459,17 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 
 		}
 		
+		// ----------Permet de placer les 
 		public void placerPanelVariable(AbsInterfaceContainer panel) {
 			int posX=(panelCentral.getWidth()*3/7)+10;
-			int posY=5;
+			int posY=border;
 			panel.setBackground(Color.white);
 			 panelCentral.add(panel);
 			 panel.setLocation(posX, posY);
 			
 		}
 		
+		//-- Permet de vider le contenu du panel qui affiche les horaires de l'employer
 		public void viderContenuAffichagePeriode() {
 			/* contenu affichage horaire*/
 			contenuAffichagePeriode.removeAll();
@@ -467,17 +486,18 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 			panelH.setLayout(null);
 			panelH.setOpaque(false);
 			
-			JLabel labelDebut=new JLabel("Debut: "+debutH.toString()); 
+			
+			JLabel labelDebut=new JLabel("Debut: "+formatDate(debutH)); 
 			panelH.add(labelDebut);
 			labelDebut.setFont(font);
 			labelDebut.setBounds(0,0, panelH.getWidth()*3/4, panelH.getHeight()/2);
 			
-			JLabel labelFin=new JLabel("Fin:   "+finH.toString()); 
+			JLabel labelFin=new JLabel("Fin:   "+formatDate(finH)); 
 			panelH.add(labelFin);
 			labelFin.setFont(font);
 			labelFin.setBounds(0,panelH.getHeight()/2, panelH.getWidth()*3/4, panelH.getHeight()/2);
 			
-			JLabel labelTotalH=new JLabel(" "+totalH.toString()+"");  
+			JLabel labelTotalH=new JLabel(formatTemps(totalH));  
 			panelH.add(labelTotalH);
 			labelTotalH.setFont(font);
 			labelTotalH.setForeground(Color.BLUE);
@@ -489,9 +509,9 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 		}
 		
 		
-		
-		public void ajoutLabelHoraire() { // permet d'ajouter les label au panel(a la fenetreHoraire )
-			int x=5,y=5;
+		//-- permet d'ajouter les label au panel(a la fenetreHoraire )
+		public void ajoutLabelHoraire() { 
+			int x=border,y=border;
 			int pos=0;
 			for(JPanel pan:listeHoraire) {
 				contenuAffichagePeriode.add(pan);
@@ -507,19 +527,43 @@ public class FenetreHoraire extends AbsInterfaceContainer {
 		public void affichageHoraire(Vector<LocalDateTime> deb,Vector<LocalDateTime> fin,Vector<Double> heures) {
 			if(!(deb.size()==fin.size() && fin.size()==heures.size())) new FenetreErreur("Un des noeuds de votre liste de quart de travail est erronï¿½!!!").afficher(FenetreErreur.ERREUR);
 			
-			Double totalHeure=0.0;
+			double totalHeure=0.0;
 			for(int i=0;i<deb.size();i++) {
 				listeHoraire.addElement(ajoutHoraire(deb.elementAt(i),fin.elementAt(i),heures.elementAt(i)));// representre la liste de tous les labels des horaire de l'employï¿½
 			    totalHeure+=heures.elementAt(i);
 			}
-			String total=""+totalHeure;
-			etiquetteTotalHeure.setText(total+" Hrs");  
+			etiquetteTotalHeure.setText(formatTemps(totalHeure)+"  (H:M)");  
 			ajoutLabelHoraire();
 			contenuAffichagePeriode.setSize(contenuAffichagePeriode.getPreferredSize()); 
 			
 			//--------on vide  la liste de label d'horaires------------
 			listeHoraire=new Vector<JPanel>();
 		}
+		
+		public String formatTemps(double totalHeure) {
+			String format="";
+			String FHeure="";
+			String FMinute="";
+			
+			int heure=(int)totalHeure/60;
+			if(heure<10) FHeure="0"+heure;
+			else FHeure=""+heure;
+			
+			double temp=totalHeure -heure;
+			int minute=(int)(temp*60);
+			if(minute<10) FMinute="0"+minute;
+			else FMinute=""+minute;
+			
+			format=FHeure+":"+FMinute;
+			format=format.toUpperCase();
+			return format;
+		}
+		
+		public String formatDate(LocalDateTime date) {
+			String format=date.format(DateTimeFormatter.ofPattern("yyyy MM dd  '[' HH ':' mm ']'")).toString();
+			return format;
+		}
+		
 		
 		public void ajoutActionFenetre( AbsControleur controleur) {
 			boutValiderPeriode.addActionListener(controleur);

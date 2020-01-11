@@ -14,6 +14,7 @@ public class Infirmier extends Employer {
 		Employer.nbWorkers++;
 	    this.name=name;
 	    Id=setId();
+	    fonction=Employer.FONCTION_GENERAL;
 	    
 	}
 

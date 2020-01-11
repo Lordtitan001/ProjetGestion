@@ -47,6 +47,11 @@ public class Button extends JButton  {
         //this.addMouseListener(this);
     }
     
+    public void setTextBoutton(String text) {
+    	this.setText("<html> <center>" + text.replaceAll("\n", "<br/>")
+        + "</center> </html>");
+    }
+    
    
     public Color getCouleur() {
 		return couleur;

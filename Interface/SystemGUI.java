@@ -25,7 +25,7 @@ public class SystemGUI extends JFrame {
         contentPanel.setLayout(layout);
         this.add(contentPanel);
         this.setTitle("Logiciel Gestion");
-        this.setSize(1000, 1000);
+        this.setSize(1200, 900);
         contentPanel.setSize(this.getWidth(), this.getHeight());
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

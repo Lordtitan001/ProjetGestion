@@ -25,8 +25,8 @@ public class TestCompany {
 
 		JFrame fenetre= new JFrame("FENETRE HORAIRE");
 		
-		int xFene=800;
-		int yFene=700;
+		int xFene=1200;
+		int yFene=900;
 		
 		// dimension de notre fenetre
 		fenetre.setSize(new Dimension(xFene, yFene));
@@ -67,7 +67,8 @@ public class TestCompany {
 						 
 				 /**********************  ON CREE DES EMPLOY�S DE LA COMPAGNIE***********************/
 				 
-				 Employer infirmier1=new Infirmier("Infirmiere Num1");
+				 //Employer infirmier1=new Infirmier("Infirmiere Num1");
+				 Superviseur infirmier1=new Superviseur("Superviseur Num1");
 				 maCompagnie.addWorker(infirmier1);
 				 
 				 Employer infirmier2=new Infirmier("Infirmiere Num2");

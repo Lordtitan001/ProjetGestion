@@ -25,11 +25,23 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		fene.ajoutActionFenetre(this);// Ici on ajoute le controleur a la fenetre
 		fene.getEtiquetteNomEmployer().setText(employer.getName());
 		fene.getEtiquetteIdEmployer().setText(employer.getId());
+		setButton_Punch_In_or_Out();
+		choixSession() ;
 	}
-	
 	
 	//-----------------LES METHODES DU CONTROLEUR--------------------------------------
 	
+	//-- Permet d'afficher le bon boutton punch In/out dans la fenetre
+	public void setButton_Punch_In_or_Out() {
+		if(employer.getIsWorking())feneHoraire.getBoutPunchOutHoraire().setTextBoutton("Punch_Out");
+		else feneHoraire.getBoutPunchOutHoraire().setTextBoutton("Punch_In");
+	}
+	
+	public void choixSession() {
+		if(employer.getFonction()==Employer.FONCTION_SUPERVISOR) feneHoraire.sessionSuperviseur();
+	}
+	
+	//-------------PERMET DE RECCUPERER L'INTERVALE DE DATE ENTREE PAR L'UTILISATEUR 
 	public Map.Entry<Vector<Double>, Vector<Vector<LocalDateTime>>> getIntervaleDateHoraire() {
 		
 		/*Ici on controle si la selection faite par l'utilisateur et conforme*/
@@ -53,7 +65,7 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		
 		/*Ici on verifie si l'intervalle de date est conforme*/
 		if(datefin.compareTo(dateDebut)<=0) {
-			new FenetreErreur("la Date de d�but inferieur � la date de fin").afficher(FenetreErreur.ERREUR);
+			new FenetreErreur("la Date de debut inferieur a la date de fin").afficher(FenetreErreur.ERREUR);
 			return null;
 		}
 		
@@ -61,15 +73,10 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		Vector<LocalDateTime> listeDateFin=new Vector<LocalDateTime>();
 		Vector<Double> listeHoraire= new Vector<Double>();
 		HashMap<LocalDate,LinkedList<MyDay>> listeQuart=employer.getDayList();
-		
-		System.out.println("---***--- date de debut "+dateDebut.toString()+" ---**--- det de fin" + datefin.toString());
-		
-		
+	
 		for(Map.Entry<LocalDate,LinkedList<MyDay>> entre:listeQuart.entrySet()) { 
 			
 			LocalDate date=entre.getKey();
-			System.out.println("---***--- INFO EMPLOYER-------"+listeQuart.size()+"----"+employer.getName());
-			//System.out.println("---***----*****-- LA DATE -----**-- "+date);
 			if(dateDebut.compareTo(date)<=0 && date.compareTo(datefin)<=0  ) {// on verifie que la date est dans l'intervalle selectionn�
 				
 				
@@ -141,38 +148,33 @@ public class ControleurFeneHoraire extends  AbsControleur {
 		
 		//--------------ACTION DU BOUTTON QUITTER DE LA FENETRE HORAIRE ----------------
 		if(e.getSource().equals(feneHoraire.getBoutQuitterHoraire())) {
-			// System.out.println("------------------------ VOUS AVEZ CLIKER SUR LE BOUTTON QUITTER DE LA FENETRE HORAIRE");
-			// feneHoraire.viderContenuAffichagePeriode();
-			
-			// feneHoraire.getMoisIn().setSelectedItem("MM");
-			// feneHoraire.getJourIn().setSelectedItem("JJ");
-			// int anneCourante= LocalDate.now().getYear();
-			// feneHoraire.getAnneeIn().setSelectedItem(""+anneCourante);
-			
-			// feneHoraire.getMoisOut().setSelectedItem("MM");
-			// feneHoraire.getJourOut().setSelectedItem("JJ");
-			// feneHoraire.getAnneeOut().setSelectedItem(""+anneCourante);
-			// IL FAUT CONTINUER POUR FAIRE LA TRANSITION A LA FENETRE PRINCIPALE
-
+		
 			SystemGUI.getCardLayout().show(SystemGUI.getContentPanel(), "acceuil");
 		}
 		
+		//--------------ACTION DU BOUTTON PUNCH_IN_OUT DE LA FENETRE HORAIRE ----------------
 		if(e.getSource().equals(feneHoraire.getBoutPunchOutHoraire())) {
 			ControleurAcceuil.punchInout(employer);
-			//Utiliser getIsWorking pour changer l'affichage du boutton
+			setButton_Punch_In_or_Out();
 		}
 	}
 	
-	 //M�thode appel�e lors du survol de la souris
+	 //Methode appelee lors du survol de la souris
 	  public void mouseEntered(MouseEvent e) { 
 		  Button bout=(Button)e.getSource();
 		  if(bout.getText().contains("Quitter"))  bout.setCouleur(Color.red);
-		  else bout.setCouleur(Color.green);
+		  else {
+			  if(bout.getText().contains("Punch")) {
+				  if(employer.getIsWorking()) bout.setCouleur(Color.red);
+				  else bout.setCouleur(Color.green);
+			  }
+			  else bout.setCouleur(Color.green);
+		  }
 		   bout.repaint();
 		  System.out.println("************ EVENEMENT DU BOUTON CLIKER ****************"+bout.getText());
 	  }
 
-	  //M�thode appel�e lorsque la souris sort de la zone du bouton
+	  //Methode appellee lorsque la souris sort de la zone du bouton
 	  public void mouseExited(MouseEvent e) {
 		  Button bout=(Button)e.getSource();
 		  bout.setCouleur(Color.white);

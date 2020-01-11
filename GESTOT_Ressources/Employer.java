@@ -16,18 +16,19 @@ public abstract class Employer implements Serializable{
 	protected static Day dayWorkersList=new Day(); // represente la liste <employe-listePeriodes> pour tous les employ� ayant travaill�  ce jours
 	protected static int nbWorkers=0;
 	private int additionalShift = 0;
+	protected String fonction="";
+	//---  Pour attribuer une fonction a un employer;
+	public final static String FONCTION_SUPERVISOR="Supervisor_EMP";
+	public final static String FONCTION_GENERAL="GENERAL_EMP";
 
 	
-	/*public Employer(String firtsname,String lastName) {  
-		nbWorkers++;
-		this.firtsname=firtsname;
-		this.lastName=lastName;
-		Id=setId();
-	}*/
 	
 	/* geter*/
 	public boolean getIsWorking(){
 		return isWorking;
+	}
+	public String getFonction() {
+		return fonction;
 	}
 
 	public String getId() {return Id;}
@@ -40,6 +41,10 @@ public abstract class Employer implements Serializable{
 	public int getNbEmployer() {return nbWorkers;}
 	
 	/*seter*/
+	public void setFonction(final String poste) {
+		if(poste==FONCTION_SUPERVISOR) fonction=FONCTION_SUPERVISOR;
+		if(poste==FONCTION_GENERAL) fonction=FONCTION_GENERAL;
+	}
 	public void setName(String name) {this.name=name;}
 	public void setPassWord(String pass) {this.passWord=pass;}
 	
