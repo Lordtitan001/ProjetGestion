@@ -62,12 +62,12 @@ public class Company implements Serializable {
         for (var entrySet : workers.entrySet()) {
             Node currentNode = nomEmployerNode;
             for (char val : entrySet.getValue().getName().toCharArray()) {
-                if (currentNode.nextChild(val) == null) {
-                    currentNode.getAdjaceNodes().add(new Node(currentNode, val));
+                if (currentNode.nextChild(Character.toLowerCase(val)) == null) {
+                    currentNode.getAdjaceNodes().add(new Node(currentNode, Character.toLowerCase(val)));
                 }
                 currentNode.getListeEmployers().put(entrySet.getKey(), entrySet.getValue());
                 currentNode.getAutoComplete().add(entrySet.getValue().getName());
-                currentNode = currentNode.nextChild(val);
+                currentNode = currentNode.nextChild(Character.toLowerCase(val));
             }
             currentNode.getListeEmployers().put(entrySet.getKey(), entrySet.getValue());
             currentNode.getAutoComplete().add(entrySet.getValue().getName());

@@ -12,10 +12,10 @@ public class SystemGUI extends JFrame {
     private static JPanel contentPanel = new JPanel();
 
     public SystemGUI() {
-        Employer infirmier1 = new Infirmier("kevin");
-        Employer infirmier2 = new Infirmier("eric");
+        Superviseur infirmier1 = new Superviseur("KeVin");
+        Employer infirmier2 = new Infirmier("eRic");
         Employer infirmier3 = new Infirmier("kev lems");
-        Employer infirmier4 = new Infirmier("kev mich");
+        Employer infirmier4 = new Infirmier("Kev mich");
         Employer infirmier5 = new Infirmier("Infirmiere Num5");
         Company.addWorker(infirmier1);
         Company.addWorker(infirmier2);
@@ -42,18 +42,13 @@ public class SystemGUI extends JFrame {
 
     public static JPanel getContentPanel(){
         return contentPanel;
-    }
+    } 
 
     public static void main(String[] args) {
         SystemGUI systemGUI = new SystemGUI();
-
         AcceuilGUI acceuil = new AcceuilGUI(systemGUI.getSize());
-        // FenetreHoraire fHoraire = new FenetreHoraire((int)systemGUI.getSize().getWidth(), 
-        // (int)systemGUI.getSize().getHeight());
         getContentPanel().add(acceuil, "acceuil");
-        //getContentPanel().add(fHoraire, "horaire");
         systemGUI.setVisible(true);
-
     }
 
 

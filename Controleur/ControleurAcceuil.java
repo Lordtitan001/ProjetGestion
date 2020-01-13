@@ -54,34 +54,37 @@ public class ControleurAcceuil extends AbsControleur {
     public void afficherListeEmployers(HashMap<String, Employer> employerMap) {
         DefaultListModel<Employer> model = new DefaultListModel<>();
         model.addAll(employerMap.values());
+        acceuilGUI.getEmployerJList().clearSelection();
         acceuilGUI.getEmployerJList().setCellRenderer(new EmployerListCellRenderer());
         acceuilGUI.getEmployerJList().setModel(model);
     }
 
     public boolean ouvrirSession(Employer employer, String password) {
 
-        if(employer.getPassWord().compareTo(password) == 0){
-        FenetreHoraire fHoraire = new FenetreHoraire(acceuilGUI.getWidth(), acceuilGUI.getHeight());
-        AbsControleur controleurHoraire = new ControleurFeneHoraire(fHoraire, employer);
-        SystemGUI.getContentPanel().add(fHoraire, "horaire");
-        SystemGUI.getCardLayout().show(SystemGUI.getContentPanel(), "horaire");
-        acceuilGUI.getPasswordField().setText("");
-        acceuilGUI.getLogInErrorLabel().setText("");
-        return true;
-        }
-        else{
+        if (employer.getPassWord().compareTo(password) == 0) {
+            FenetreHoraire fHoraire = new FenetreHoraire(acceuilGUI.getWidth(), acceuilGUI.getHeight());
+            AbsControleur controleurHoraire = new ControleurFeneHoraire(fHoraire, employer);
+            SystemGUI.getContentPanel().add(fHoraire, "horaire");
+            SystemGUI.getCardLayout().show(SystemGUI.getContentPanel(), "horaire");
+            acceuilGUI.getPasswordField().setText("");
+            acceuilGUI.getLogInErrorLabel().setText("");
+            return true;
+        } else {
             return false;
         }
     }
 
-    public void changeButton(){
-        if (acceuilGUI.getEmployerJList().getSelectedValue().getIsWorking()) {
-            acceuilGUI.getPunchButton().setText("Punch Out");
-            acceuilGUI.getPunchButton().setBackground(Color.RED);
-        } else {
-            acceuilGUI.getPunchButton().setText("Punch in");
-            acceuilGUI.getPunchButton().setBackground(Color.GREEN);
+    public void changeButton() {
+        Employer emp = acceuilGUI.getEmployerJList().getSelectedValue();
+        if (emp != null) {
+            if (emp.getIsWorking()) {
+                acceuilGUI.getPunchButton().setText("Punch Out");
+                acceuilGUI.getPunchButton().setBackground(Color.RED);
+            } else {
+                acceuilGUI.getPunchButton().setText("Punch in");
+                acceuilGUI.getPunchButton().setBackground(Color.GREEN);
+            }
         }
-      }
+    }
 
 }

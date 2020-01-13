@@ -10,6 +10,8 @@ import Controleur.ControleurAcceuil;
 import Interface.AbsInterfaceContainer;
 import GESTOT_Ressources.*;
 import java.awt.event.*;
+import java.util.HashMap;
+
 import Kevin.Code.*;
 import Interface.AcceuilGUI;
 
@@ -167,7 +169,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
                 count = 0;
               }
               if (currentNode != null) {
-                controleurAcceuil.afficherListeEmployers(currentNode.getListeEmployers());
+                controleurAcceuil.afficherListeEmployers(new HashMap<String, Employer>());
               }
             } else if (currentNode != null) {
               if (currentNode.getParent() != null) {
@@ -175,9 +177,13 @@ public class AcceuilGUI extends AbsInterfaceContainer {
                 lastNode = currentNode.clone();
                 controleurAcceuil.afficherListeEmployers(currentNode.getListeEmployers());
               }
+              else{
+                controleurAcceuil.afficherListeEmployers(currentNode.getListeEmployers());
+              }
             }
-          } else if (currentNode != null) {
-            currentNode = currentNode.nextChild(event.getKeyChar());
+          } 
+          else if (currentNode != null) {
+            currentNode = currentNode.nextChild(Character.toLowerCase(event.getKeyChar()));
             if (currentNode != null) {
               lastNode = currentNode.clone();
               controleurAcceuil.afficherListeEmployers(currentNode.getListeEmployers());
@@ -248,6 +254,7 @@ public class AcceuilGUI extends AbsInterfaceContainer {
       @Override
       public void valueChanged(ListSelectionEvent e) {
         controleurAcceuil.changeButton();
+
       }
     });
 
