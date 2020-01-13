@@ -11,6 +11,11 @@ public abstract class Employer implements Serializable{
 	protected MyDay myDay=new MyDay();// represente une periode de travail
 	protected String Id;
 	protected String name;
+	protected String surname;
+	protected String NAS;
+	protected String accountNumber;
+	protected Date  Birthday;
+	protected Date hiredDay;
 	protected String passWord="Employer000";
 	protected HashMap<LocalDate,LinkedList<MyDay>> dayList=new HashMap<LocalDate,LinkedList<MyDay>>(); // represente la liste de toutes les periodes de travail de l'employ�
 	protected static Day dayWorkersList=new Day(); // represente la liste <employe-listePeriodes> pour tous les employ� ayant travaill�  ce jours
@@ -39,6 +44,28 @@ public abstract class Employer implements Serializable{
 	public HashMap<LocalDate,LinkedList<MyDay>> getDayList() {return dayList;}
 	public Day getDayWorkersList() {return dayWorkersList;}
 	public int getNbEmployer() {return nbWorkers;}
+	
+	public String getSurname() {
+		return surname;
+	}
+	
+	public String getNAS() {
+		return NAS;
+	}
+	
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	
+	public Date getBirthday() {
+		return Birthday;
+	}
+	
+	public Date getHiredDay() {
+		return hiredDay;
+	}
+	
+
 	
 	/*seter*/
 	public void setFonction(final String poste) {
@@ -74,6 +101,25 @@ public abstract class Employer implements Serializable{
     	return (listPeriod == null);
 	}
 	
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+	
+	public void setNAS(String nAS) {
+		NAS = nAS;
+	}
+	
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	
+	public void setBirthday(Date birthday) {
+		Birthday = birthday;
+	}
+	
+	public void setHiredDay(Date hiredDay) {
+		this.hiredDay = hiredDay;
+	}
 	/*Permet d'ajouter une PERIODE DONN�E parmis les periodes de l'employ�: Utile pour des revendications  */
 	public boolean addDayInList(MyDay periode) {
 		LinkedList<MyDay> listPeriod = null;
