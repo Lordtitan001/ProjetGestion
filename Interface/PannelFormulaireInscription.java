@@ -61,6 +61,7 @@ public class PannelFormulaireInscription extends AbsInterfaceContainer {
 
 	int x ;
 	int y ;
+	
 	public JPanel getFormulaire() {
 		return formulaire;
 	}
@@ -288,15 +289,13 @@ public class PannelFormulaireInscription extends AbsInterfaceContainer {
 	/*-----------------Constructeur----------------------*/
 
 
-	public PannelFormulaireInscription(int x, int y) {
+	public PannelFormulaireInscription(Dimension dim) {
 		this.setLayout(null);
-		//this.x = x;
-		//this.y = y;
-		//this.setSize(this.x, this.y);
-		// this.setOpaque(false);
-		// this.setBackground(Color.YELLOW);
+		this.setPreferredSize(dim);
+		
+		this.setOpaque(false);
 		addFormulaire(this);
-		// addButton();
+		addButton(this, dim);
 	}
 
 	/*-----------------Methodes--------------------------*/
@@ -308,142 +307,143 @@ public class PannelFormulaireInscription extends AbsInterfaceContainer {
 		 Insets insets = panel.getInsets();
 
 		nom = new JLabel("Nom");
-		//nom.setFont(font);
+		
 		nom.setForeground(Color.black);
 		
-		nom.setBounds(insets.left, insets.top, 60, 10);
+		nom.setBounds(this.getWidth(), this.getHeight()+ 10, 60, 15);
 		panel.add(nom);
 
 		prenom=new JLabel("Prenom");
-		prenom.setFont(font);
+		
 		prenom.setForeground(Color.black);
-		prenom.setBounds(insets.left, insets.top + 20, 20, 5);
+		prenom.setBounds(this.getWidth(), this.getHeight() + 50, 60, 15);
 
 		identifiant=new JLabel("Identifiant");
-		identifiant.setFont(font);
+		
 		identifiant.setForeground(Color.black);
-		identifiant.setBounds(x/10, 3*(y/10), 20, 5);
+		identifiant.setBounds(this.getWidth(), this.getHeight() + 90, 60, 15);
 
 		motDePasse=new JLabel("Mot de passe");
-		motDePasse.setFont(font);
+		
 		motDePasse.setForeground(Color.black);
-		motDePasse.setBounds(x/10, 4*(y/10), 20, 5);
+		motDePasse.setBounds(this.getWidth(), this.getHeight() + 130, 80, 20);
 
 		confirmMotDePasse=new JLabel("Confirmer Mot de passe");
-		confirmMotDePasse.setFont(font);
+		
 		confirmMotDePasse.setForeground(Color.black);
-		confirmMotDePasse.setBounds(x/10, 5*(y/10), 20, 5);
+		confirmMotDePasse.setBounds(this.getWidth(), this.getHeight() + 170, 160, 20);
 
-		dateDeNaissance=new JLabel(" Date de Naissance");
-		dateDeNaissance.setFont(font);
+		dateDeNaissance=new JLabel("Date de Naissance");
+		
 		dateDeNaissance.setForeground(Color.black);
-		dateDeNaissance.setBounds(x/10, 9*(y/10), 20, 5);
+		dateDeNaissance.setBounds(this.getWidth(), this.getHeight() + 330, 140, 20);
 
 		dateDembauche=new JLabel("Date d'embauche");
-		dateDembauche.setFont(font);
+		
 		dateDembauche.setForeground(Color.black);
-		dateDembauche.setBounds(x/10, 10*(y/10), 20, 5);
+		dateDembauche.setBounds(this.getWidth(), this.getHeight() + 370, 140, 20);
 
 		type=new JLabel("Type de personnel");
-		type.setFont(font);
+		
 		type.setForeground(Color.black);
-		type.setBounds(x/10, 8*(y/10), 20, 5);
+		type.setBounds(this.getWidth(), this.getHeight() + 290, 140, 15);
 
 		NAS=new JLabel("NAS");
-		NAS.setFont(font);
+		
 		NAS.setForeground(Color.black);
-		NAS.setBounds(x/10, 6*(y/10), 20, 5);
+		NAS.setBounds(this.getWidth(),this.getHeight() + 210, 80, 15);
 
 		numeroBanquaire=new JLabel("Numero de Compte");
-		numeroBanquaire.setFont(font);
+		
 		numeroBanquaire.setForeground(Color.black);
-		numeroBanquaire.setBounds(x/10, 7*(y/10), 20, 5);
+		numeroBanquaire.setBounds(this.getWidth(), this.getHeight() + 250, 140, 20);
 
 		/*Les TextFields*/
 		texteNom = new JTextField();
-		texteNom.setBounds((x/10)+25, y/10, 20, 5);
+		texteNom.setBounds(this.getWidth() + 70, this.getHeight()+ 10, 100, 15);
 		textePrenom = new JTextField();
-		textePrenom.setBounds((x/10)+25, 2*(y/10), 20, 5);
+		textePrenom.setBounds(this.getWidth() + 70, this.getHeight() + 50, 100, 15);
 		texteIdentifiant = new JTextField();
-		texteIdentifiant.setBounds((x/10)+25, 3*(y/10), 20, 5);
+		texteIdentifiant.setBounds(this.getWidth() + 70, this.getHeight() + 90, 100, 15);
 		texteMotDePasse = new JPasswordField();
-		texteMotDePasse.setBounds((x/10)+25, 4*(y/10), 20, 5);
+		texteMotDePasse.setBounds(this.getWidth() + 90, this.getHeight() + 130, 100, 15);
 		texteConfirmeMotDePasse = new JPasswordField();
-		texteConfirmeMotDePasse.setBounds((x/10)+25, 5*(y/10), 20, 5);
+		texteConfirmeMotDePasse.setBounds(this.getWidth() + 170, this.getHeight() + 170, 100, 15);
 		texteType = new JTextField();
-		texteType.setBounds((x/10)+25, 8*(y/10), 20, 5);
+		texteType.setBounds(this.getWidth() + 150, this.getHeight() + 290, 100, 15);
 		texteNAS = new JTextField();
-		texteNAS.setBounds((x/10)+25, 6*(y/10), 20, 5);
+		texteNAS.setBounds(this.getWidth() + 90, this.getHeight() + 210, 100, 15);
 		texteNumeroBanquaire = new JTextField();
-		texteNumeroBanquaire.setBounds((x/10)+25, 7*(y/10), 20, 5);
+		texteNumeroBanquaire.setBounds(this.getWidth() + 150, this.getHeight() + 250, 100, 15);
 
 		/*Les ComboBox */
 		dateNaissanceJour=new JComboBox();
 		dateNaissanceJour.addItem("JJ");
-		for(int i=1;i<31;i++) {
+		for(int i=1;i<=31;i++) {
 		String jour="";
 
 		if(i<10) jour="0";
 		jour=""+String.valueOf(i);
 		dateNaissanceJour.addItem(jour);
 		}
-		dateNaissanceJour.setBounds(3*(x/10), 9*(y/10), 5, 5);
+		dateNaissanceJour.setBounds(this.getWidth() +150, this.getHeight() + 330, 40, 30);
 
 		dateDembauchementJour=new JComboBox();
 		dateDembauchementJour.addItem("JJ");
-		for(int i=1;i<31;i++) {
+		for(int i=1;i<=31;i++) {
 		String jour="";
 
 		if(i<10) jour="0";
 		jour=""+String.valueOf(i);
 		dateDembauchementJour.addItem(jour);
 		}
-		dateDembauchementJour.setBounds(3*(x/10), 10*(y/10), 5, 5);
+		dateDembauchementJour.setBounds(this.getWidth() +150, this.getHeight() + 370, 40, 30);
 
 		String [] items = {"MM",
 		"Jan","Fev","Mar","Avr","Mai","Jun","Jui","Aou","Sep","Oct","Nov","Dec"};
 		dateNaissanceMois=new JComboBox(items);
-		dateNaissanceMois.setBounds(3*(x/10) + 5, 9*(y/10), 5, 5);
+		dateNaissanceMois.setBounds(this.getWidth() +190, this.getHeight() + 330, 45, 30);
 
 		dateDembauchementMois=new JComboBox(items);
-		dateDembauchementMois.setBounds(3*(x/10) + 5, 10*(y/10), 5, 5);
+		dateDembauchementMois.setBounds(this.getWidth() +190, this.getHeight() + 370, 45, 30);
 
 		dateDembauchementAnnee=new JComboBox();
 		int anneCourante= LocalDate.now().getYear();
 		for(int i=2019;i<anneCourante+1;i++) dateDembauchementAnnee.addItem(""+i);
-		dateDembauchementAnnee.setBounds(3*(x/10) + 10, 9*(y/10), 5, 5);
+		dateDembauchementAnnee.setBounds(this.getWidth() + 235, this.getHeight() + 370, 50, 30);
 
 		dateNaissanceAnnee=new JComboBox();
 		for(int i=1940;i<anneCourante+1;i++) dateNaissanceAnnee.addItem(""+i);
-		dateDembauchementAnnee.setBounds(3*(x/10) + 10, 10*(y/10), 5, 5);
+		dateNaissanceAnnee.setBounds(this.getWidth() +235, this.getHeight() + 330, 50, 30);
 
 		panel.add(nom);
 		panel.add(prenom);
-		// panel.add(identifiant);
-		// panel.add(motDePasse);
-		// panel.add(dateDeNaissance);
-		// panel.add(dateDembauche);
-		// panel.add(type);
-		// panel.add(NAS);
-		// panel.add(numeroBanquaire);
-		// panel.add(dateNaissanceJour);
-		// panel.add(dateDembauchementJour);
-		// panel.add(dateNaissanceMois);
-		// panel.add(dateDembauchementMois);
-		// panel.add(dateDembauchementAnnee);
-		// panel.add(dateNaissanceAnnee);
-		// panel.add(texteNom);
-		// panel.add(textePrenom);
-		// panel.add(texteIdentifiant);
-		// panel.add(texteMotDePasse);
-		// panel.add(texteConfirmeMotDePasse);
-		// panel.add(texteType);
-		// panel.add(texteNAS);
-		// panel.add(texteNumeroBanquaire);
+		panel.add(identifiant);
+		panel.add(motDePasse);
+		panel.add(dateDeNaissance);
+		panel.add(dateDembauche);
+		panel.add(type);
+		panel.add(NAS);
+		panel.add(numeroBanquaire);
+		panel.add(confirmMotDePasse);
+		panel.add(dateNaissanceJour);
+		panel.add(dateDembauchementJour);
+		panel.add(dateNaissanceMois);
+		panel.add(dateDembauchementMois);
+		panel.add(dateDembauchementAnnee);
+		panel.add(dateNaissanceAnnee);
+		panel.add(texteNom);
+		panel.add(textePrenom);
+		panel.add(texteIdentifiant);
+		panel.add(texteMotDePasse);
+		panel.add(texteConfirmeMotDePasse);
+		panel.add(texteType);
+		panel.add(texteNAS);
+		panel.add(texteNumeroBanquaire);
 
 	}
 
-	void addButton() {
+	void addButton(PannelFormulaireInscription panel, Dimension dim) {
 
 		valider = new JButton("Valider");
 		valider.addActionListener(new ActionListener() {
@@ -453,7 +453,8 @@ public class PannelFormulaireInscription extends AbsInterfaceContainer {
 				JOptionPane.showConfirmDialog(null, "Enregistrement reussi");
 			}
 		});
-
+		valider.setBounds(dim.width/2, (dim.height/2) + 20, 80, 20);
+		panel.add(valider);
 	}
 
 	public static void main(String[] args) {
@@ -463,8 +464,7 @@ public class PannelFormulaireInscription extends AbsInterfaceContainer {
 		fenetre.setSize(400, 800);
 		fenetre.setLocationRelativeTo(null);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		PannelFormulaireInscription formulaire = new PannelFormulaireInscription(fenetre.getWidth(),
-				fenetre.getHeight());
+		PannelFormulaireInscription formulaire = new PannelFormulaireInscription(fenetre.getSize());
 		fenetre.add(formulaire);
 		fenetre.setVisible(true);
 	}
